@@ -1,13 +1,6 @@
 # noted
 
-An app skeleton in React.
-
-## Using this skeleton
-
-```bash
-$ npm i -g create-project
-$ create-project [NAME] radekstepan/react-create-project
-```
+Personal document search engine.
 
 ## App quickstart
 
@@ -15,4 +8,23 @@ $ create-project [NAME] radekstepan/react-create-project
 $ nvm use # optional
 $ npm i
 $ npm start # http://localhost:3000
+```
+
+## ElasticSearch
+
+### Docker
+
+Setup `docker` to not run as sudo: https://docs.docker.com/install/linux/linux-postinstall/
+
+Increase heap size: `$ sudo sysctl -w vm.max_map_count=262144`
+
+```bash
+$ docker-compose rm
+$ docker-compose up
+```
+
+### Init index
+
+```bash
+$ ./bin/init.js
 ```

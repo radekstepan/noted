@@ -1,9 +1,10 @@
 {
   "name": "noted",
-  "description": "An app skeleton in React",
+  "description": "Personal document search engine",
   "version": "0.0.0",
   "dependencies": {
     "@rematch/core": "1.1.0",
+    "axios": "0.18.0",
     "classnames": "2.2.6",
     "history": "4.9.0",
     "normalize.css": "8.0.1",

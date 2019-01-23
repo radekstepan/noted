@@ -1,0 +1,43 @@
+{
+  "mappings": {
+    "note": {
+      "properties": {
+        "path": {
+          "type": "text"
+        },
+        "title": {
+          "type": "text"
+        },
+        "text": {
+          "type": "text",
+          "fields": {
+            "english": {
+              "type": "text",
+              "analyzer": "english_noted"
+            }
+          }
+        }
+      }
+    }
+  },
+  "settings": {
+    "analysis": {
+      "filter": {
+        "english_stemmer": {
+          "type": "stemmer",
+          "language": "english"
+        },
+        "english_possessive_stemmer": {
+          "type": "stemmer",
+          "language": "possessive_english"
+        }
+      },
+      "analyzer": {
+        "english_noted": {
+          "tokenizer": "standard",
+          "filter": ["english_possessive_stemmer", "lowercase", "english_stemmer"]
+        }
+      }
+    }
+  }
+}
