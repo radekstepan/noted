@@ -28,3 +28,9 @@ $ docker-compose up
 ```bash
 $ ./bin/init.js
 ```
+
+### Convert Google Docs to TXT
+
+```bash
+$ ./bin/docs-to-txt.js
+```
