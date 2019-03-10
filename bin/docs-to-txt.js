@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 const path = require('path');
 const {promisify} = require('util');
 const {EOL} = require('os');
@@ -12,7 +13,7 @@ const cwd = path.resolve(__dirname, '../../noted-docs/input');
 const output = path.resolve(__dirname, '../../noted-docs/notes');
 
 (async function() {
-  const files = await promisify(glob)('*.txt', { cwd });
+  const files = await promisify(glob)('*.txt', {cwd});
 
   await fs.emptyDir(output);
 
@@ -83,6 +84,6 @@ const output = path.resolve(__dirname, '../../noted-docs/notes');
         const text = [first.trim(), entry.trim()].join([EOL, EOL].join(''));
         return fs.writeFile(`${output}/${name}.txt`, text);
       });
-    }, []);
+    });
   }));
 })();

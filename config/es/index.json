@@ -1,6 +1,6 @@
 {
   "mappings": {
-    "note": {
+    "doc": {
       "properties": {
         "path": {
           "type": "text"
@@ -8,7 +8,7 @@
         "title": {
           "type": "text"
         },
-        "text": {
+        "body": {
           "type": "text",
           "fields": {
             "english": {
