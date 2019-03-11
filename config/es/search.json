@@ -1,0 +1,24 @@
+{
+  "_source": ["title", "path"],
+  "query": {
+    "query_string": {
+      "query": "SEARCH_QUERY",
+      "fields": ["title^3", "body.english"],
+      "analyzer": "english_noted",
+      "fuzziness": "AUTO",
+      "default_operator": "AND",
+      "lenient": true,
+      "phrase_slop": 50
+    }
+  },
+  "size": 10,
+  "from": "PAGE_INDEX",
+  "highlight": {
+    "type": "plain",
+    "fragment_size": 100,
+    "number_of_fragments": 5,
+    "fields": {
+      "body.english": {}
+    }
+  }
+}

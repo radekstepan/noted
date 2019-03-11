@@ -23,14 +23,20 @@ $ docker-compose rm
 $ docker-compose up
 ```
 
+### Convert Google Docs to TXT
+
+```bash
+$ ./bin/docs-to-txt.js
+```
+
 ### Init index
 
 ```bash
 $ ./bin/init.js
 ```
 
-### Convert Google Docs to TXT
+### Import TXT
 
 ```bash
-$ ./bin/docs-to-txt.js
+$ ./bin/import.js
 ```
