@@ -3,7 +3,7 @@ import toRegex from 'path-to-regexp';
 import routes from '../routes';
 import history from '../history';
 
-const ROOT_TITLE = 'React App';
+const ROOT_TITLE = 'Noted';
 
 const matchURI = (path, uri) => {
   const keys = [];

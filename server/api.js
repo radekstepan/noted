@@ -13,8 +13,6 @@ const api = axios.create({
 
 const app = express();
 
-app.use(express.static(path.join(__dirname, 'build')));
-
 // Query search.
 app.get('/api/search', async (req, res) => {
   const {query: {query, page}} = req;
@@ -55,8 +53,12 @@ app.get('/api/search/doc', async (req, res) => {
   }
 });
 
-app.get('/*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
-});
+if (process.env.NODE_ENV !== 'development') {
+  app.use(express.static(path.join(__dirname, 'build')));
+
+  app.get('/*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+  });
+}
 
 app.listen(9000);

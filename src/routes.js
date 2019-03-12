@@ -1,13 +1,9 @@
-import React from "react";
+import React from 'react';
 
-import ListBooks from "./containers/ListBooks";
-import AddBook from "./containers/AddBook";
-import ViewBook from "./containers/ViewBook";
+import Dashboard from './containers/Dashboard';
 
 const routes = [
-  { path: "/", render: () => <ListBooks /> },
-  { path: "/add", title: "Add a Book", render: () => <AddBook /> },
-  { path: "/book/:idx", title: "View a Book", render: () => <ViewBook /> }
+  {path: '/', render: () => <Dashboard />}
 ];
 
 export default routes;

@@ -1,10 +1,8 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
+import {Component} from 'react';
+import {connect} from 'react-redux';
 
-import history from "./history";
-import routes from "./routes";
-
-import Topbar from "./components/Topbar";
+import history from './history';
+import routes from './routes';
 
 class App extends Component {
   componentDidMount() {
@@ -13,12 +11,7 @@ class App extends Component {
   }
 
   render() {
-    return (
-      <div>
-        <Topbar />
-        {this.props.render(this.props.state)}
-      </div>
-    );
+    return this.props.render(this.props.state);
   }
 }
 

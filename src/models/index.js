@@ -1,7 +1,7 @@
-import books from './books';
+import elastic from './elastic';
 import router from './router';
 
 export default {
-  books,
+  elastic,
   router
 };

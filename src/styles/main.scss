@@ -1,5 +1,5 @@
 @import "../../node_modules/normalize.css/normalize.css";
-@import "https://fonts.googleapis.com/css?family=Fira+Sans:400,500";
+@import "https://fonts.googleapis.com/css?family=Lora:400,700";
 
 html,
 body {
@@ -9,8 +9,9 @@ body {
 
 body,
 input {
-  font-family: 'Fira Sans', sans-serif;
-  letter-spacing: 0.25px;
+  color: #222;
+  font-size: 18px;
+  font-family: 'Lora', serif;
 }
 
 @import "./app.scss";
