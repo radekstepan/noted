@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import cls from 'classnames';
 
 class Doc extends React.Component {
   state = {visited: false};
@@ -13,10 +14,10 @@ class Doc extends React.Component {
     const {props, state} = this;
 
     return (
-      <div className={`doc ${state.visited ? 'visited' : ''}`} onClick={this.onViewDoc}>
+      <div className={cls('doc', {visited: state.visited})} onClick={this.onViewDoc}>
         <div className="header">
           <div className="title">{props.path}</div>
-          <div className={`score ${props.score >= 20 && 'high'}`}>{parseInt(props.score, 10)}</div>
+          <div className={cls('score', {high: props.score >= 20})}>{parseInt(props.score, 10)}</div>
         </div>
         <div className="body" dangerouslySetInnerHTML={{__html: props.body.join('&hellip; ')}} />
       </div>

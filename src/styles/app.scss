@@ -45,34 +45,35 @@
         flex-grow: 1;
         margin: 0 15px;
         border: 1px solid rgba(153,153,153,.2);
-        padding: 8px 10px;
+        padding: 7.5px 10px;
         outline: none;
         border-radius: 4px;
+        line-height: 1;
       }
 
-      .button {
-        cursor: pointer;
-        background: #007bff;
-        border-radius: 4px;
-        width: 40px;
-        height: 36px;
-        text-align: center;
+      // .button {
+      //   cursor: pointer;
+      //   background: #007bff;
+      //   border-radius: 4px;
+      //   width: 40px;
+      //   height: 36px;
+      //   text-align: center;
 
-        .icon {
-          margin-top: 5px;
-          height: 18px;
-          fill: #fff;
-        }
+      //   .icon {
+      //     margin-top: 5px;
+      //     height: 18px;
+      //     fill: #fff;
+      //   }
 
-        &:hover {
-          background: #0069d9;
-        }
-      }
+      //   &:hover {
+      //     background: #0069d9;
+      //   }
+      // }
     }
   }
 
   #results {
-    margin: 30px 0;
+    margin: 40px 0;
 
     .icon.spinner {
       height: 25px;
@@ -95,7 +96,7 @@
 
     .doc {
       cursor: pointer;
-      margin-top: 40px;
+      margin-top: 45px;
 
       .header {
         .title {
@@ -156,14 +157,15 @@
           background: #007bff;
           color: #fff;
           font-weight: bold;
+          cursor: default;
 
           .icon {
             fill: #fff;
           }
 
-          &:hover {
-            background: #0069d9;
-          }
+          // &:hover {
+          //   background: #0069d9;
+          // }
         }
 
         &.disabled {

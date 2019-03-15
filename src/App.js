@@ -17,7 +17,7 @@ class App extends Component {
 
 const mapState = state => ({
   state,
-  render: routes[state.router.route].render
+  render: routes[state.router.index].render
 });
 
 const mapDispatch = dispatch => ({

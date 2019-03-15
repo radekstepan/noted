@@ -1,34 +1,22 @@
 import axios from 'axios';
 
+import store from '.';
+
 const api = axios.create({
-  baseURL: 'http://0.0.0.0:9000/api'
+  baseURL: 'api'
 });
+
+const initialState = {
+  loading: false,
+  error: null,
+  q: '',
+  page: 1,
+  results: null
+};
 
 const elastic = {
   state: {
-    loading: false,
-    results: {
-      took: 28,
-      total: 303,
-      hits: [{
-        id: '2db200059ac54',
-        score: 21.675,
-        path: '2018-02-22-note.txt',
-        title: '22nd February 2018',
-        body: [
-          'Lorem <em>ipsum</em> like',
-          'gypsum rhymes with <em>ipsum</em>'
-        ]
-      }, {
-        id: 'ef0669a76b',
-        score: 10.949,
-        path: '2016-12-18-forehead.txt',
-        title: '18th December 2016',
-        body: [
-          'Oh no <em>highlight</em> is there'
-        ]
-      }]
-    }
+    ...initialState
   },
   reducers: {
     set(state, obj) {
@@ -39,16 +27,28 @@ const elastic = {
     }
   },
   effects: {
-    async search() {
-      this.set({loading: true, results: null});
+    async search(params) {
+      // Clear search.
+      if (!params.q) {
+        return this.set({...initialState});
+      }
 
-      const results = await api.get(`/search`, {
-        params: {
-          query: 'love'
-        }
+      this.set({
+        ...initialState,
+        loading: true,
+        ...params
       });
 
-      this.set({loading: false, results});
+      // Modify URL.
+      store.router.effects.navigate(`/`, params);
+
+      // Make the API call.
+      try {
+        const {data: results} = await api.get(`/search`, {params});
+        this.set({loading: false, results});
+      } catch (err) {
+        this.set({loading: false, error: `${err}`});
+      }
     }
   }
 };

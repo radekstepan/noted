@@ -1,4 +1,5 @@
 import toRegex from 'path-to-regexp';
+import qs from 'querystringify';
 
 import routes from '../routes';
 import history from '../history';
@@ -23,7 +24,7 @@ const resolve = location => {
     const route = routes[i];
     const params = matchURI(route.path, location.pathname);
     if (!params) continue;
-    return [i, params, route.title, getQueryParams(location.search)];
+    return [route.path, i, params, route.title, getQueryParams(location.search)];
   }
   throw new Error('Not found');
 };
@@ -38,17 +39,19 @@ const getQueryParams = search => {
 }
 
 const router = {
-  state: {route: ''},
+  state: {
+    index: 0
+  },
   reducers: {
     route(state, location) {
-      const [route, params, title, search] = resolve(location);
+      const [path, index, params, title, query] = resolve(location);
       document.title = title ? [ROOT_TITLE, title].join(' - ') : ROOT_TITLE;
-      return {...state, route, params, search};
+      return {...state, path, index, params, query};
     }
   },
   effects: {
-    navigate(pathname) {
-      history.push(pathname);
+    navigate(pathname, params) {
+      history.push(pathname + qs.stringify(params, true));
     },
     goBack() {
       history.goBack();
