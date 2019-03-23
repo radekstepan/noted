@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import posed, {PoseGroup} from 'react-pose';
 import Pagination from 'react-paginating';
 import cls from 'classnames';
 
@@ -8,8 +9,30 @@ import Doc from '../components/Doc';
 
 // TODO animate the results and remove spinner (flash of content)
 
+const Animation = posed.div({
+  enter: {
+    y: 0,
+    opacity: 1,
+    delay: 300,
+    transition: {
+      y: { type: 'spring', stiffness: 1000, damping: 15 },
+      default: { duration: 300 }
+    }
+  },
+  exit: {
+    y: 50,
+    opacity: 0,
+    transition: { duration: 150 }
+  }
+});
+
 class Results extends React.Component {
-  componentDidUpdate() {
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.page !== this.props.page) {
+      window.scrollTo(0, 0);
+    }
+
     if (this.props.doc) {
       this.refs.div.focus();
     }
@@ -23,11 +46,11 @@ class Results extends React.Component {
         <div className="container">
           {error && <div className="message error">{error}</div>}
           {results && <div className="message success">{results.total} results found</div>}
-          {results && results.hits.map((doc, index) => <Doc
-            {...doc}
-            index={index}
-            key={doc.id}
-          />)}
+          <PoseGroup>{results && results.hits.map((doc, index) =>
+            <Animation key={doc.id}>
+              <Doc {...doc} index={index} />
+            </Animation>)}
+          </PoseGroup>
           {results && results.pages > 1 && <Pagination
             total={results.total}
             limit={results.limit}

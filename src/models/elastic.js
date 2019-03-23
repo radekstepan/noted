@@ -34,6 +34,11 @@ const elastic = {
         return this.set({...initialState});
       }
 
+      // Make sure we have int on initial search from URL.
+      if (params.page) {
+        params.page = parseInt(params.page, 10);
+      }
+
       this.set({
         ...initialState,
         loading: true,
