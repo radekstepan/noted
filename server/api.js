@@ -11,7 +11,7 @@ const esDoc = require('../config/es/doc');
 const PAGE_LIMIT = 10;
 
 const api = axios.create({
-  baseURL: 'http://0.0.0.0:9200'
+  baseURL: 'http://elasticsearch:9200'
 });
 
 const app = express();
