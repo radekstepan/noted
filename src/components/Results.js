@@ -7,22 +7,20 @@ import cls from 'classnames';
 import Icon from '../components/Icon';
 import Doc from '../components/Doc';
 
-// TODO animate the results and remove spinner (flash of content)
-
 const Animation = posed.div({
   enter: {
-    y: 0,
     opacity: 1,
-    delay: 300,
     transition: {
-      y: { type: 'spring', stiffness: 1000, damping: 15 },
-      default: { duration: 300 }
+      ease: 'easeIn',
+      duration: 100
     }
   },
   exit: {
-    y: 50,
     opacity: 0,
-    transition: { duration: 150 }
+    transition: {
+      ease: 'easeOut',
+      duration: 50
+    }
   }
 });
 
@@ -41,11 +39,25 @@ class Results extends React.Component {
   render() {
     const {error, results, q, search, closeDoc} = this.props;
 
+    // Success message.
+    let message;
+    if (results) {
+      if (results.total === 1) {
+        message = '1 result'
+      } else {
+        if (results.page !== 1) {
+          message = `Page ${results.page} of ${results.total} results`;
+        } else {
+          message = `${results.total} results`;
+        }
+      }
+    }
+
     return (
       <div id="results" ref="div" tabIndex="0" onKeyDown={e => e.key === 'Escape' && closeDoc()}>
         <div className="container">
           {error && <div className="message error">{error}</div>}
-          {results && <div className="message success">{results.total} results found</div>}
+          {message && <div className="message success">{message}</div>}
           <PoseGroup>{results && results.hits.map((doc, index) =>
             <Animation key={doc.id}>
               <Doc {...doc} index={index} />
