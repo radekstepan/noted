@@ -28,7 +28,7 @@ app.get('/api/search', async (req, res) => {
     const {data: {hits: {total, hits}}} = await api.post('/noted/doc/_search', merge([
       esSearch,
       {query: {query_string: {query: q}}},
-      {from}
+      {from: PAGE_LIMIT * from}
     ]));
 
     res.json({
@@ -36,13 +36,7 @@ app.get('/api/search', async (req, res) => {
       page: from + 1,
       pages: Math.ceil(total / PAGE_LIMIT),
       limit: PAGE_LIMIT,
-      hits: hits.map(hit => ({
-        id: hit._id,
-        score: hit._score,
-        path: hit._source.path,
-        title: hit._source.title,
-        body: hit.highlight['body.english']
-      }))
+      hits: hits.map(mapHit)
     });
   } catch (err) {
     res.status(500);
@@ -52,20 +46,25 @@ app.get('/api/search', async (req, res) => {
 
 // Search a single doc.
 app.get('/api/search/doc', async (req, res) => {
-  const {query: {q, index}} = req;
+  const {query: {q, page, index}} = req;
+
+  const from = page ? parseInt(page, 10) - 1 : 0;
 
   try {
     if (!q) {
       throw new Error(`Missing 'q' parameter`);
     }
+    if (!index) {
+      throw new Error(`Missing 'index' parameter`);
+    }
 
     const {data: {hits: {hits}}} = await api.post('/noted/doc/_search', merge([
       esDoc,
       {query: {query_string: {query: q}}},
-      {from: index}
+      {from: (PAGE_LIMIT * from) + parseInt(index, 10)}
     ]));
 
-    res.json(hits[0]);
+    res.json(mapHit(hits[0]));
   } catch (err) {
     res.status(500);
     res.json({error: `${err}`, q});
@@ -81,3 +80,11 @@ if (process.env.NODE_ENV !== 'development') {
 }
 
 app.listen(9000);
+
+const mapHit = hit => ({
+  id: hit._id,
+  score: hit._score,
+  path: hit._source.path,
+  title: hit._source.title,
+  body: hit.highlight['body.english']
+});

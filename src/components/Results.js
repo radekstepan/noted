@@ -10,17 +10,17 @@ import Doc from '../components/Doc';
 const Results = props => (
   <div id="results">
     <div className="container">
-      {props.loading && <Icon name="spinner" />}
       {props.error && <div className="message error">{props.error}</div>}
       {props.results && <div className="message success">{props.results.total} results found</div>}
-      {props.results && props.results.hits.map(doc => <Doc
+      {props.results && props.results.hits.map((doc, index) => <Doc
         {...doc}
+        index={index}
         key={doc.id}
       />)}
       {props.results && props.results.pages > 1 && <Pagination
         total={props.results.total}
         limit={props.results.limit}
-        pageCount="5"
+        pageCount="7"
         currentPage={props.results.page}
       >{d => (
         <div className="pagination">

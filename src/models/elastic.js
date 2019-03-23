@@ -11,7 +11,8 @@ const initialState = {
   error: null,
   q: '',
   page: 1,
-  results: null
+  results: null,
+  doc: null
 };
 
 const elastic = {
@@ -48,6 +49,23 @@ const elastic = {
         this.set({loading: false, results});
       } catch (err) {
         this.set({loading: false, error: `${err}`});
+      }
+    },
+
+    async searchDoc(index, store) {
+      const {elastic: {q, page}} = store;
+
+      try {
+        const {data: doc} = await api.get(`/search/doc`, {
+          params: {
+            q,
+            page,
+            index
+          }
+        });
+        this.set({doc});
+      } catch (err) {
+        // TODO handle
       }
     }
   }

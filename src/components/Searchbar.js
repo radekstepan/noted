@@ -27,11 +27,6 @@ class Searchbar extends React.Component {
             autoCorrect="off"
             spellCheck="false"
           />
-          {/*<div className="button">
-            <div className="icon">
-              <Icon name="search" />
-            </div>
-          </div>*/}
         </div>
       </div>
     );

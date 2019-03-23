@@ -142,7 +142,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
-      margin-top: 30px;
+      margin-top: 50px;
 
       .page {
         padding: 4px;
@@ -182,6 +182,71 @@
           fill: #222;
           vertical-align: bottom;
           width: 24px;
+        }
+      }
+    }
+  }
+
+  #modal {
+    .overlay {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      width: 100%;
+      background: rgba(255,255,255,.75);
+      cursor: pointer;
+    }
+
+    .modal {
+      cursor: default;
+      margin: 30px 0;
+      box-shadow: 0 3px 7px rgba(0,0,0,0.05);
+      border: 1px solid rgba(0,0,0,.2);
+      background: #fff;
+
+      .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px;
+        background: #fafbff;
+        border-bottom: 1px solid #efefef;
+
+        .title {
+          flex-grow: 1;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          color: #007bff;
+          font-weight: bold;
+          line-height: 1.5;
+        }
+
+        .button {
+          margin-left: 16px;
+          padding: 6px 10px;
+
+          .icon {
+            width: 12px;
+            cursor: pointer;
+
+            path {
+              fill: #868e96;
+            }
+          }
+        }
+      }
+
+      .body {
+        padding: 15px;
+        line-height: 1.6;
+        white-space: pre-wrap;
+        max-height: 80vh;
+        overflow-y: auto;
+        overflow-x: auto;
+
+        em {
+          background: #fff4bd;
         }
       }
     }

@@ -7,7 +7,7 @@ class Doc extends React.Component {
 
   onViewDoc = () => {
     this.setState({visited: true});
-    this.props.navigate(`/doc/${this.props.id}`)
+    this.props.searchDoc(this.props.index);
   }
 
   render() {
@@ -26,7 +26,7 @@ class Doc extends React.Component {
 }
 
 const mapDispatch = dispatch => ({
-  navigate: dispatch.router.navigate
+  searchDoc: dispatch.elastic.searchDoc
 });
 
 export default connect(null, mapDispatch)(Doc);
