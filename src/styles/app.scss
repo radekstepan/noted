@@ -33,6 +33,7 @@
         font-size: 30px;
         margin-bottom: 2px;
         color: #000;
+        cursor: pointer;
 
         span {
           color: #007bff;
@@ -74,6 +75,10 @@
 
   #results {
     margin: 40px 0;
+
+    &:focus {
+      outline: none;
+    }
 
     .icon.spinner {
       height: 25px;

@@ -8,6 +8,10 @@ class Searchbar extends React.Component {
     this.props.search({q});
   }, 500);
 
+  goHome = () => {
+    this.props.search({q: this.props.query.q, page: 1});
+  };
+
   componentDidMount() {
     // Persist search through URL.
     this.props.search(this.props.query);
@@ -17,7 +21,7 @@ class Searchbar extends React.Component {
     return (
       <div id="searchbar">
         <div className="container">
-          <div className="title">Noted<span>.</span></div>
+          <div className="title" onClick={this.goHome}>Noted<span>.</span></div>
           <input className="input"
             type="text"
             ref='input'

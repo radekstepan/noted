@@ -3,43 +3,34 @@ import {connect} from 'react-redux';
 
 import Icon from '../components/Icon';
 
-// TODO fix scroll issue when modal shows up
-class DocModal extends React.Component {
-  componentDidMount() {
-    this.refs.div.focus();
-  }
+const DocModal = props => {
+  if (!props.doc) return false;
 
-  render() {
-    const {doc} = this.props;
-
-    return (
-      <div
-        ref="div"
-        tabIndex="0"
-        id="modal"
-        onClick={this.props.closeModal}
-        onKeyDown={e => e.key === 'Escape' && this.props.closeModal()}
-      >
-        <div className="overlay">
-          <div className="container">
-            <div className="modal" onClick={e => e.stopPropagation()}>
-              <div className="header">
-                <div className="title">{doc.path}</div>
-                <div className="button">
-                  <Icon name="close" />
-                </div>
+  return (
+    <div id="modal" onClick={props.closeDoc}>
+      <div className="overlay">
+        <div className="container">
+          <div className="modal" onClick={e => e.stopPropagation()}>
+            <div className="header">
+              <div className="title">{props.doc.path}</div>
+              <div className="button" onClick={props.closeDoc}>
+                <Icon name="close" />
               </div>
-              <div className="body" dangerouslySetInnerHTML={{__html: doc.body[0]}} />
             </div>
+            <div className="body" dangerouslySetInnerHTML={{__html: props.doc.body[0]}} />
           </div>
         </div>
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
 
-const mapDispatch = dispatch => ({
-  closeModal: () => dispatch.elastic.set({doc: null})
+const mapState = state => ({
+  doc: state.elastic.doc
 });
 
-export default connect(null, mapDispatch)(DocModal);
+const mapDispatch = dispatch => ({
+  closeDoc: dispatch.elastic.closeDoc
+});
+
+export default connect(mapState, mapDispatch)(DocModal);

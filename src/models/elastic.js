@@ -67,6 +67,10 @@ const elastic = {
       } catch (err) {
         // TODO handle
       }
+    },
+
+    closeDoc() {
+      this.set({doc: null});
     }
   }
 };
