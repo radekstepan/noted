@@ -24,14 +24,17 @@ class FileUpload extends React.Component {
   render() {
     return (
       <div id="upload" className={cls({show: this.state.show})}>
-        <Dropzone onDrop={acceptedFiles => console.log(acceptedFiles)}>
+        <Dropzone onDrop={this.props.upload}>
           {({getRootProps}) => (
             <div className="overlay">
               <div className="modal" {...getRootProps()}>
                 <div className="button" onClick={this.onHide}>
                   <Icon name="close" />
                 </div>
-                <Icon name="upload" />
+                <div className="body">
+                  <Icon name="upload" />
+                  <div className="label">Drag &amp; Drop Files Here</div>
+                </div>
               </div>
             </div>
           )}

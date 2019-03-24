@@ -1,7 +1,5 @@
 import axios from 'axios';
 
-import store from '.';
-
 const api = axios.create({
   baseURL: 'api'
 });
@@ -9,10 +7,6 @@ const api = axios.create({
 const initialState = {
   loading: false,
   error: null,
-  q: '',
-  page: 1,
-  results: null,
-  doc: null
 };
 
 const files = {
@@ -29,7 +23,19 @@ const files = {
   },
   effects: {
     async upload(files) {
-      console.log(files);
+      // TODO limit too many files uploaded.
+      if (files.length > 100) {
+        return;
+      }
+
+      const data = new FormData();
+      files.forEach((file, i) => data.append(`files[${i}]`, file));
+
+      try {
+        await api.post('/upload', data);
+      } catch (err) {
+        console.warn(err);
+      }
     }
   }
 };

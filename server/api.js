@@ -1,9 +1,13 @@
 const path = require('path');
+const {EOL} = require('os');
+const crypto = require('crypto');
 
 const express = require('express');
 const nocache = require('nocache');
+const multer = require('multer');
 const axios = require('axios');
 const {all: merge} = require('deepmerge');
+const {mapSeries: map} = require('p-iteration');
 
 const esSearch = require('../config/es/search');
 const esDoc = require('../config/es/doc');
@@ -14,6 +18,7 @@ const api = axios.create({
   baseURL: 'http://elasticsearch:9200'
 });
 
+const upload = multer();
 const app = express();
 
 app.use(nocache());
@@ -68,6 +73,51 @@ app.get('/api/search/doc', async (req, res) => {
   } catch (err) {
     res.status(500);
     res.json({error: `${err}`, q});
+  }
+});
+
+// File upload.
+app.post('/api/upload', upload.any(), async (req, res) => {
+  try {
+    if (!req.files) {
+      throw new Error('No files uploaded');
+    }
+
+    const files = await map(req.files, async file => {
+      const {originalname: path, mimetype: type, buffer} = file;
+
+      // TODO handle zip file uploads for bulk.
+      if (!['text/plain', 'application/octet-stream'].includes(type)) {
+        throw new Error(`Type ${type} not accepted, upload plain text files`);
+      }
+
+      const body = buffer.toString('utf8');
+
+      if (/\ufffd/.test(body)) {
+        throw new Error('Upload plain text files');
+      }
+
+      let [title, ...rest] = body.split(EOL);
+      if (!rest.length) {
+        title = null;
+      }
+
+      const id = crypto.createHash('md5').update(path).digest('hex');
+
+      // TODO switch path to name.
+      await api.post(`/noted/doc/${id}`, {
+        path,
+        title,
+        body
+      });
+
+      return {path, id};
+    });
+
+    res.json({files});
+  } catch (err) {
+    res.status(500);
+    res.json({error: `${err}`});
   }
 });
 
