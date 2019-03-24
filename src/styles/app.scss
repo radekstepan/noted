@@ -17,6 +17,25 @@
     }
   }
 
+  .overlay {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    background: rgba(255,255,255,.75);
+  }
+
+  .modal {
+    box-shadow: 0 3px 7px rgba(0,0,0,0.05);
+    border: 1px solid #cdcdcd;
+    background: #fff;
+  }
+
+  .title {
+    font-weight: bolder;
+    color: #007bff;
+  }
+
   #searchbar {
     background: #fafbff;
     border-bottom: 1px solid #efefef;
@@ -29,7 +48,6 @@
       align-items: center;
 
       .title {
-        font-weight: 700;
         font-size: 30px;
         margin-bottom: 2px;
         color: #000;
@@ -106,8 +124,6 @@
 
       .header {
         .title {
-          font-weight: bolder;
-          color: #007bff;
           display: inline-block;
         }
 
@@ -195,20 +211,12 @@
 
   #modal {
     .overlay {
-      position: fixed;
-      top: 0;
-      bottom: 0;
-      width: 100%;
-      background: rgba(255,255,255,.75);
       cursor: pointer;
     }
 
     .modal {
       cursor: default;
       margin: 30px 0;
-      box-shadow: 0 3px 7px rgba(0,0,0,0.05);
-      border: 1px solid rgba(0,0,0,.2);
-      background: #fff;
 
       .header {
         display: flex;
@@ -223,8 +231,6 @@
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
-          color: #007bff;
-          font-weight: bold;
           line-height: 1.5;
         }
 
@@ -253,6 +259,57 @@
 
         em {
           background: #fff4bd;
+        }
+      }
+    }
+  }
+
+  #upload {
+    display: none;
+
+    &.show {
+      display: block;
+    }
+
+    .modal {
+      position: relative;
+      top: 50%;
+      transform: translateY(-50%);
+      margin: 0 auto;
+      width: 500px;
+      height: 500px;
+
+      &:focus {
+        outline: none;
+      }
+
+      .button {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        padding: 6px 10px;
+
+        .icon {
+          width: 12px;
+          cursor: pointer;
+
+          path {
+            fill: #cdcdcd;
+          }
+        }
+      }
+
+      .icon.upload {
+        opacity: 0.8;
+        width: 140px;
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+        margin: 0 auto;
+        display: block;
+
+        path {
+          fill: #cdcdcd;
         }
       }
     }
