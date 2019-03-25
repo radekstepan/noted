@@ -9,9 +9,9 @@ const axios = require('axios');
 const {all: merge} = require('deepmerge');
 const {mapSeries: map} = require('p-iteration');
 
-const esIndex = require('../config/es/index');
-const esSearch = require('../config/es/search');
-const esDoc = require('../config/es/doc');
+const searchIndex = require('../config/searchIndex');
+const searchQuery = require('../config/searchQuery');
+const searchDoc = require('../config/searchDoc');
 
 const PAGE_LIMIT = 10;
 
@@ -32,7 +32,7 @@ app.get('/api/search', async (req, res) => {
 
   try {
     const {data: {hits: {total, hits}}} = await api.post('/noted/doc/_search', merge([
-      esSearch,
+      searchQuery,
       {query: {query_string: {query: q}}},
       {from: PAGE_LIMIT * from}
     ]));
@@ -65,7 +65,7 @@ app.get('/api/search/doc', async (req, res) => {
     }
 
     const {data: {hits: {hits}}} = await api.post('/noted/doc/_search', merge([
-      esDoc,
+      searchDoc,
       {query: {query_string: {query: q}}},
       {from: (PAGE_LIMIT * from) + parseInt(index, 10)}
     ]));
@@ -129,7 +129,7 @@ app.delete('/api/index', async (req, res) => {
   }
 
   try {
-    await api.put('/noted', esIndex);
+    await api.put('/noted', searchIndex);
     res.status(204).send({});
   } catch (err) {
     res.status(500);
