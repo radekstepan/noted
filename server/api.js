@@ -9,6 +9,7 @@ const axios = require('axios');
 const {all: merge} = require('deepmerge');
 const {mapSeries: map} = require('p-iteration');
 
+const esIndex = require('../config/es/index');
 const esSearch = require('../config/es/search');
 const esDoc = require('../config/es/doc');
 
@@ -84,7 +85,7 @@ app.post('/api/upload', upload.any(), async (req, res) => {
     }
 
     const files = await map(req.files, async file => {
-      const {originalname: path, mimetype: type, buffer} = file;
+      const {originalname: filename, mimetype: type, buffer} = file;
 
       if (!['text/plain', 'application/octet-stream'].includes(type)) {
         throw new Error(`Type ${type} not accepted, upload plain text files`);
@@ -101,16 +102,15 @@ app.post('/api/upload', upload.any(), async (req, res) => {
         title = null;
       }
 
-      const id = crypto.createHash('md5').update(path).digest('hex');
+      const id = crypto.createHash('md5').update(filename).digest('hex');
 
-      // TODO switch path to name.
       await api.post(`/noted/doc/${id}`, {
-        path,
+        filename,
         title,
         body
       });
 
-      return {path, id};
+      return {filename, id};
     });
 
     res.json({files});
@@ -120,7 +120,22 @@ app.post('/api/upload', upload.any(), async (req, res) => {
   }
 });
 
-// TODO add reset endpoint and remove scripts. DELETE /api/index
+// Delete the index.
+app.delete('/api/index', async (req, res) => {
+  try {
+    await api.delete('/noted');
+  } catch (err) {
+    // Silently fail if index doesn't exist.
+  }
+
+  try {
+    await api.put('/noted', esIndex);
+    res.status(204).send({});
+  } catch (err) {
+    res.status(500);
+    res.json({error: err.response.text});
+  }
+});
 
 if (process.env.NODE_ENV !== 'development') {
   app.use(express.static(path.join(__dirname, 'build')));
@@ -135,7 +150,7 @@ app.listen(9000);
 const mapHit = hit => ({
   id: hit._id,
   score: hit._score,
-  path: hit._source.path,
+  filename: hit._source.filename,
   title: hit._source.title,
   body: hit.highlight['body.english']
 });

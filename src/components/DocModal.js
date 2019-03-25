@@ -12,7 +12,7 @@ const DocModal = props => {
         <div className="container">
           <div className="modal" onClick={e => e.stopPropagation()}>
             <div className="header">
-              <div className="title">{props.doc.path}</div>
+              <div className="title">{props.doc.filename}</div>
               <div className="button" onClick={props.closeDoc}>
                 <Icon name="close" />
               </div>

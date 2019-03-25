@@ -7,36 +7,17 @@ Personal document search engine.
 ```bash
 $ nvm use # optional
 $ npm i
-$ npm start # http://localhost:3000
+$ docker-compose up # http://localhost:3000
 ```
 
-## ElasticSearch
+### Init/reset search index
 
-### Docker
+```bash
+$ curl --request DELETE --url 'http://localhost:3000/api/index'
+```
+
+## Troubleshooting
 
 Setup `docker` to not run as sudo: https://docs.docker.com/install/linux/linux-postinstall/
 
 Increase heap size: `$ sudo sysctl -w vm.max_map_count=262144`
-
-```bash
-$ docker-compose rm
-$ docker-compose up
-```
-
-### Convert Google Docs to TXT
-
-```bash
-$ ./bin/docs-to-txt.js
-```
-
-### Init index
-
-```bash
-$ ./bin/init.js
-```
-
-### Import TXT
-
-```bash
-$ ./bin/import.js
-```

@@ -1,5 +1,5 @@
 {
-  "_source": ["title", "path"],
+  "_source": ["title", "filename"],
   "query": {
     "query_string": {
       "query": "SEARCH_QUERY",

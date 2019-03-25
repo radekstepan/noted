@@ -2,7 +2,7 @@
   "mappings": {
     "doc": {
       "properties": {
-        "path": {
+        "filename": {
           "type": "text"
         },
         "title": {
