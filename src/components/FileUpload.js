@@ -18,10 +18,25 @@ class FileUpload extends React.Component {
   }
 
   componentWillUnmount() {
-    window.removeEventListener('dragenter', this.show);
+    window.removeEventListener('dragenter', this.onShow);
   }
 
   render() {
+    const {count, error, uploading} = this.props;
+
+    let message;
+    if (uploading) {
+      message = <>Indexing &hellip;</>;
+    } else {
+      if (error) {
+        message = error;
+      } else if (count) {
+        message = `Indexed ${count} document${count > 1 ? 's' : ''}`
+      } else {
+        message = <>Drag &amp; Drop Files Here</>;
+      }
+    }
+
     return (
       <div id="upload" className={cls({show: this.state.show})}>
         <Dropzone onDrop={this.props.upload}>
@@ -33,7 +48,7 @@ class FileUpload extends React.Component {
                 </div>
                 <div className="body">
                   <Icon name="upload" />
-                  <div className="label">Drag &amp; Drop Files Here</div>
+                  <div className="message">{<>{message}</>}</div>
                 </div>
               </div>
             </div>

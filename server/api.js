@@ -86,7 +86,6 @@ app.post('/api/upload', upload.any(), async (req, res) => {
     const files = await map(req.files, async file => {
       const {originalname: path, mimetype: type, buffer} = file;
 
-      // TODO handle zip file uploads for bulk.
       if (!['text/plain', 'application/octet-stream'].includes(type)) {
         throw new Error(`Type ${type} not accepted, upload plain text files`);
       }
@@ -120,6 +119,8 @@ app.post('/api/upload', upload.any(), async (req, res) => {
     res.json({error: `${err}`});
   }
 });
+
+// TODO add reset endpoint and remove scripts. DELETE /api/index
 
 if (process.env.NODE_ENV !== 'development') {
   app.use(express.static(path.join(__dirname, 'build')));

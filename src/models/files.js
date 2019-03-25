@@ -1,12 +1,16 @@
 import axios from 'axios';
+import whilst from 'p-whilst';
+
+const BATCH_SIZE = 100;
 
 const api = axios.create({
   baseURL: 'api'
 });
 
 const initialState = {
-  loading: false,
+  uploading: false,
   error: null,
+  count: 0
 };
 
 const files = {
@@ -23,18 +27,22 @@ const files = {
   },
   effects: {
     async upload(files) {
-      // TODO limit too many files uploaded.
-      if (files.length > 100) {
-        return;
-      }
-
-      const data = new FormData();
-      files.forEach((file, i) => data.append(`files[${i}]`, file));
+      this.set({...initialState, uploading: true});
 
       try {
-        await api.post('/upload', data);
+        let i = 0;
+        await whilst(() => i < files.length, async () => {
+          const data = new FormData();
+          files
+            .slice(i, i + BATCH_SIZE)
+            .forEach((file, i) => data.append(`files[${i}]`, file));
+
+          await api.post('/upload', data);
+          i += BATCH_SIZE;
+        });
+        this.set({uploading: false, count: files.length});
       } catch (err) {
-        console.warn(err);
+        this.set({uploading: false, error: `${err}`});
       }
     }
   }
