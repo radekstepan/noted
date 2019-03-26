@@ -25,6 +25,7 @@ const Animation = posed.div({
 });
 
 class Results extends React.Component {
+  div = React.createRef();
 
   componentDidUpdate(prevProps) {
     if (prevProps.page !== this.props.page) {
@@ -32,7 +33,7 @@ class Results extends React.Component {
     }
 
     if (this.props.doc) {
-      this.refs.div.focus();
+      this.div.current.focus();
     }
   }
 
@@ -54,7 +55,7 @@ class Results extends React.Component {
     }
 
     return (
-      <div id="results" ref="div" tabIndex="0" onKeyDown={e => e.key === 'Escape' && closeDoc()}>
+      <div id="results" ref={this.div} tabIndex="0" onKeyDown={e => e.key === 'Escape' && closeDoc()}>
         <div className="container">
           {error && <div className="message error">{error}</div>}
           {message && <div className="message success">{message}</div>}

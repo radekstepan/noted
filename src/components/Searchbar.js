@@ -3,10 +3,11 @@ import {connect} from 'react-redux';
 import debounce from 'debounce';
 
 class Searchbar extends React.Component {
-  onSearch = debounce(evt => {
-    const {target: {value: q}} = evt;
-    this.props.search({q});
-  }, 500);
+  input = React.createRef();
+
+  onSearch = debounce(evt =>
+    this.props.search({q: this.input.current.value})
+  , 500);
 
   goHome = () => {
     this.props.search({q: this.props.query.q, page: 1});
@@ -24,9 +25,9 @@ class Searchbar extends React.Component {
           <div className="title" onClick={this.goHome}>Noted<span>.</span></div>
           <input className="input"
             type="text"
-            ref='input'
-            placeholder={this.props.query.q}
-            onChange={evt => !evt.persist() && this.onSearch(evt)}
+            ref={this.input}
+            defaultValue={this.props.query.q}
+            onChange={this.onSearch}
             autoComplete="off"
             autoCorrect="off"
             spellCheck="false"
