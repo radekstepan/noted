@@ -24,12 +24,21 @@ Increase heap size: `$ sudo sysctl -w vm.max_map_count=262144`
 
 ## TODO
 
-- Improve progress status and upload modal
-- Favoriting of documents which index keywords from search
-- Bookmarks that show up on the dashboard
-- Search results sorted by date (filename)
-- User accounts
-- Store visited status across all pages in a search
-- Implement https://github.com/souhe/reactScrollbar for document body
-- Use arrow keys to navigate between results
-- Fix search query being unescaped and accepting Regex
+-  5 Use dates from filename as a primary source of dates
+-  5 Improve progress status and upload modal
+- 13 Favoriting of documents with index keywords from search
+-  8 Bookmarks that show up on the dashboard
+-  8 Apply decay function over search results https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-function-score-query.html
+-  5 Search results sorted by date (filename)
+- 13 User accounts
+-  5 Store visited status across all pages in a search
+-  5 Implement https://github.com/souhe/reactScrollbar for document body
+-  5 Use arrow keys to navigate between results
+-  5 Fix search query being unescaped and accepting Regex
+-  5 Show "time ago" in search results titles
+-  3 Show upload modal on top of everything and switch off overlay under the original document
+-  5 Does uploading a folder still check filetype?
+-  5 With dates add "On this day..." and show entries for this day from previous years
+-  3 Close upload modal with Esc key too
+- 13 Compare with Lunr with view of making this into a standalone WebView app
+-  5 Return filenames from API upload errors and display to user

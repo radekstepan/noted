@@ -12,7 +12,7 @@ services:
         soft: -1
         hard: -1
     volumes:
-      - ~/dev/noted-docs/esdata:/usr/share/elasticsearch/data
+      - esdata1:/usr/share/elasticsearch/data
     networks:
       - esnet
 
@@ -30,7 +30,7 @@ services:
       - esnet
 
 volumes:
-  esdata:
+  esdata1:
     driver: local
 
 networks:

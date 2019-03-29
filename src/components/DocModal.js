@@ -1,7 +1,12 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import TimeAgo from 'javascript-time-ago';
+import en from 'javascript-time-ago/locale/en';
 
 import Icon from '../components/Icon';
+
+TimeAgo.addLocale(en);
+// const ta = new TimeAgo('en-US');
 
 const DocModal = props => {
   if (!props.doc) return false;

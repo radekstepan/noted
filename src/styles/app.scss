@@ -149,6 +149,8 @@
       .body {
         margin-top: 10px;
         line-height: 1.6;
+        overflow-x: hidden;
+        text-overflow: ellipsis;
 
         em {
           background: #fff4bd;
@@ -257,7 +259,8 @@
         white-space: pre-wrap;
         max-height: 80vh;
         overflow-y: auto;
-        overflow-x: auto;
+        overflow-x: hidden;
+        text-overflow: ellipsis;
 
         em {
           background: #fff4bd;

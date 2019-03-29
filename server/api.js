@@ -1,11 +1,13 @@
 const path = require('path');
 const {EOL} = require('os');
-const crypto = require('crypto');
 
 const express = require('express');
 const nocache = require('nocache');
 const multer = require('multer');
 const axios = require('axios');
+const hasha = require('hasha');
+const chrono = require('chrono-node');
+const error = require('serialize-error');
 const {all: merge} = require('deepmerge');
 const {mapSeries: map} = require('p-iteration');
 
@@ -73,7 +75,7 @@ app.get('/api/search/doc', async (req, res) => {
     res.json(mapHit(hits[0]));
   } catch (err) {
     res.status(500);
-    res.json({error: `${err}`, q});
+    res.json({error: error(err).message, q});
   }
 });
 
@@ -92,31 +94,47 @@ app.post('/api/upload', upload.any(), async (req, res) => {
       }
 
       const body = buffer.toString('utf8');
-
       if (/\ufffd/.test(body)) {
         throw new Error('Upload plain text files');
       }
 
-      let [title, ...rest] = body.split(EOL);
-      if (!rest.length) {
-        title = null;
+      let dateObj = new Date(); // default date to now
+      let title = '';
+
+      let [line, ...rest] = body.split(EOL);
+      if (rest.length) {
+        let [datePart, titlePart] = line.split('-');
+
+        if (titlePart) {
+          title = titlePart.trim();
+        }
+
+        if (!datePart.match(/20\d\d/)) {
+          throw new Error(`Unrecognized date in "${datePart}"`);
+        }
+
+        dateObj = chrono.parseDate(datePart);
       }
 
-      const id = crypto.createHash('md5').update(filename).digest('hex');
+      // 2015-01-01T12:10:30Z
+      const date = dateObj.toISOString().replace(/\.000/, '');
+
+      const id = hasha(filename, {algorithm: 'md5'});
 
       await api.post(`/noted/doc/${id}`, {
         filename,
         title,
+        date,
         body
       });
 
-      return {filename, id};
+      return {filename, date, title, id};
     });
 
     res.json({files});
   } catch (err) {
     res.status(500);
-    res.json({error: `${err}`});
+    res.json({error: error(err).message});
   }
 });
 
@@ -151,6 +169,7 @@ const mapHit = hit => ({
   id: hit._id,
   score: hit._score,
   filename: hit._source.filename,
+  date: hit._source.date,
   title: hit._source.title,
   body: hit.highlight['body.english']
 });

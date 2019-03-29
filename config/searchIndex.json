@@ -5,6 +5,9 @@
         "filename": {
           "type": "text"
         },
+        "date": {
+          "type": "date"
+        },
         "title": {
           "type": "text"
         },

@@ -2,7 +2,8 @@ const nodemon = require('nodemon');
 
 nodemon({
   script: 'server/api.js',
-  ext: 'js json'
+  ext: 'js json',
+  ignore: ['src/']
 });
 
 nodemon.on('start', () =>
