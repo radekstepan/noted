@@ -25,13 +25,27 @@ const Animation = posed.div({
 });
 
 class Results extends React.Component {
+  state = {visited: {}};
+
   div = React.createRef();
 
+  onViewDoc = (id, index) => {
+    this.setState({visited: {...this.state.visited, [id]: true}});
+    this.props.searchDoc(index + 1);
+  }
+
   componentDidUpdate(prevProps) {
+    // Search has changed.
+    if (prevProps.q !== this.props.q) {
+      this.setState({visited: {}});
+    }
+
+    // Page has changed.
     if (prevProps.page !== this.props.page) {
       window.scrollTo(0, 0);
     }
 
+    // Viewing the full document.
     if (this.props.doc) {
       this.div.current.focus();
     }
@@ -61,7 +75,9 @@ class Results extends React.Component {
           {message && <div className="message success">{message}</div>}
           <PoseGroup>{results && results.hits.map((doc, index) =>
             <Animation key={doc.id}>
-              <Doc {...doc} index={index} />
+              <div onClick={() => this.onViewDoc(doc.id, index)}>
+                <Doc {...doc} visited={this.state.visited[doc.id]} />
+              </div>
             </Animation>)}
           </PoseGroup>
           {results && results.pages > 1 && <Pagination
@@ -104,6 +120,7 @@ const mapState = state => {
 
 const mapDispatch = dispatch => ({
   search: dispatch.elastic.search,
+  searchDoc: dispatch.elastic.searchDoc,
   closeDoc: dispatch.elastic.closeDoc
 });
 

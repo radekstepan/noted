@@ -30,18 +30,18 @@ app.use(nocache());
 app.get('/api/search', async (req, res) => {
   const {query: {q, page}} = req;
 
-  const from = page ? parseInt(page, 10) - 1 : 0;
+  const from = page ? parseInt(page, 10) : 1;
 
   try {
     const {data: {hits: {total, hits}}} = await api.post('/noted/doc/_search', merge([
       searchQuery,
       {query: {query_string: {query: q}}},
-      {from: PAGE_LIMIT * from}
+      {from: PAGE_LIMIT * (from - 1)}
     ]));
 
     res.json({
       total,
-      page: from + 1,
+      page: from,
       pages: Math.ceil(total / PAGE_LIMIT),
       limit: PAGE_LIMIT,
       hits: hits.map(mapHit)
@@ -56,21 +56,31 @@ app.get('/api/search', async (req, res) => {
 app.get('/api/search/doc', async (req, res) => {
   const {query: {q, page, index}} = req;
 
-  const from = page ? parseInt(page, 10) - 1 : 0;
-
   try {
     if (!q) {
       throw new Error(`Missing 'q' parameter`);
+    }
+    if (!page) {
+      throw new Error(`Missing 'page' parameter`);
     }
     if (!index) {
       throw new Error(`Missing 'index' parameter`);
     }
 
+    const from = PAGE_LIMIT * (parseInt(page, 10) - 1) + parseInt(index, 10) - 1;
+    if (from >= 10000) {
+      throw new Error(`Request window ${from} is too large`);
+    }
+
     const {data: {hits: {hits}}} = await api.post('/noted/doc/_search', merge([
       searchDoc,
       {query: {query_string: {query: q}}},
-      {from: (PAGE_LIMIT * from) + parseInt(index, 10)}
+      {from}
     ]));
+
+    if (!hits.length) {
+      throw new Error(`Document on page '${page}' index '${index}' does't exist`);
+    }
 
     res.json(mapHit(hits[0]));
   } catch (err) {

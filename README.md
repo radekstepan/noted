@@ -31,7 +31,6 @@ Increase heap size: `$ sudo sysctl -w vm.max_map_count=262144`
 -  8 Apply decay function over search results https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-function-score-query.html
 -  5 Search results sorted by date (filename)
 - 13 User accounts
--  5 Store visited status across all pages in a search
 -  5 Implement https://github.com/souhe/reactScrollbar for document body
 -  5 Use arrow keys to navigate between results
 -  5 Fix search query being unescaped and accepting Regex
