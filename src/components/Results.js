@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import posed, {PoseGroup} from 'react-pose';
 import Pagination from 'react-paginating';
+import Scroll from 'react-perfect-scrollbar';
 import cls from 'classnames';
 
 import Icon from '../components/Icon';
@@ -42,7 +43,7 @@ class Results extends React.Component {
 
     // Page has changed.
     if (prevProps.page !== this.props.page) {
-      window.scrollTo(0, 0);
+      this.div.current.scrollIntoView();
     }
 
     // Viewing the full document.
@@ -69,46 +70,48 @@ class Results extends React.Component {
     }
 
     return (
-      <div id="results" ref={this.div} tabIndex="0" onKeyDown={e => e.key === 'Escape' && closeDoc()}>
-        <div className="container">
-          {error && <div className="message error">{error}</div>}
-          {message && <div className="message success">{message}</div>}
-          <PoseGroup>{results && results.hits.map((doc, index) =>
-            <Animation key={doc.id}>
-              <div onClick={() => this.onViewDoc(doc.id, index)}>
-                <DocPreview {...doc} visited={this.state.visited[doc.id]} />
-              </div>
-            </Animation>)}
-          </PoseGroup>
-          {results && results.pages > 1 && <Pagination
-            total={results.total}
-            limit={results.limit}
-            pageCount="7"
-            currentPage={results.page}
-          >{d => (
-            <div className="pagination">
-              <div
-                className={cls('page', {disabled: !d.hasPreviousPage})}
-                onClick={() => d.hasPreviousPage && search({q, page: d.currentPage - 1})}
-              >
-                <Icon name="left" />
-              </div>
-              {d.pages.map(page =>
+      <div id="results" onKeyDown={e => e.key === 'Escape' && closeDoc()}>
+        <Scroll>
+          <div className="container" ref={this.div} tabIndex="0">
+            {error && <div className="message error">{error}</div>}
+            {message && <div className="message success">{message}</div>}
+            <PoseGroup>{results && results.hits.map((doc, index) =>
+              <Animation key={doc.id}>
+                <div onClick={() => this.onViewDoc(doc.id, index)}>
+                  <DocPreview {...doc} visited={this.state.visited[doc.id]} />
+                </div>
+              </Animation>)}
+            </PoseGroup>
+            {results && results.pages > 1 && <Pagination
+              total={results.total}
+              limit={results.limit}
+              pageCount="7"
+              currentPage={results.page}
+            >{d => (
+              <div className="pagination">
                 <div
-                  key={page}
-                  className={cls('page', {active: page === d.currentPage})}
-                  onClick={() => page !== d.currentPage && search({q, page})}
-                >{page}</div>)
-              }
-              <div
-                className={cls('page', {disabled: !d.hasNextPage})}
-                onClick={() => d.hasNextPage && search({q, page: d.currentPage + 1})}
-              >
-                <Icon name="right" />
+                  className={cls('page', {disabled: !d.hasPreviousPage})}
+                  onClick={() => d.hasPreviousPage && search({q, page: d.currentPage - 1})}
+                >
+                  <Icon name="left" />
+                </div>
+                {d.pages.map(page =>
+                  <div
+                    key={page}
+                    className={cls('page', {active: page === d.currentPage})}
+                    onClick={() => page !== d.currentPage && search({q, page})}
+                  >{page}</div>)
+                }
+                <div
+                  className={cls('page', {disabled: !d.hasNextPage})}
+                  onClick={() => d.hasNextPage && search({q, page: d.currentPage + 1})}
+                >
+                  <Icon name="right" />
+                </div>
               </div>
-            </div>
-          )}</Pagination>}
-        </div>
+            )}</Pagination>}
+          </div>
+        </Scroll>
       </div>
     )
   }

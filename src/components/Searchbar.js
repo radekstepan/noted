@@ -1,5 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
+import cls from 'classnames';
 import debounce from 'debounce';
 
 class Searchbar extends React.Component {
@@ -20,9 +21,9 @@ class Searchbar extends React.Component {
 
   render() {
     return (
-      <div id="searchbar">
+      <div id="searchbar" className={cls({white: this.props.doc})}>
         <div className="container">
-          <div className="title" onClick={this.goHome}>Noted<span>.</span></div>
+          <div className="title" onClick={this.goHome}>Noted</div>
           <input className="input"
             type="text"
             ref={this.input}
@@ -38,9 +39,10 @@ class Searchbar extends React.Component {
   };
 }
 
-const mapState = state => {
-  return state.router;
-};
+const mapState = state => ({
+  query: state.router.query,
+  doc: state.elastic.doc
+});
 
 const mapDispatch = dispatch => ({
   search: dispatch.elastic.search

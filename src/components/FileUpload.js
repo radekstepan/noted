@@ -33,7 +33,7 @@ class FileUpload extends React.Component {
       } else if (count) {
         message = `Indexed ${count} document${count > 1 ? 's' : ''}`
       } else {
-        message = <>Drag &amp; Drop Files Here</>;
+        message = 'Drop your documents here';
       }
     }
 
@@ -48,7 +48,7 @@ class FileUpload extends React.Component {
                 </div>
                 <div className="body">
                   <Icon name="upload" />
-                  <div className="message">{<>{message}</>}</div>
+                  <div className={cls('message', {error})}>{message}</div>
                 </div>
               </div>
             </div>

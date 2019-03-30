@@ -39,6 +39,10 @@ app.get('/api/search', async (req, res) => {
       {from: PAGE_LIMIT * (from - 1)}
     ]));
 
+    if (total && !hits.length) {
+      throw new Error(`Page ${page} doesn't exist`);
+    }
+
     res.json({
       total,
       page: from,

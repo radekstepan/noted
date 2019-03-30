@@ -25,7 +25,6 @@ Increase heap size: `$ sudo sysctl -w vm.max_map_count=262144`
 ## TODO
 
 -  5 Use dates from filename as a primary source of dates
--  5 Improve progress status and upload modal
 - 13 Favoriting of documents with index keywords from search
 -  8 Bookmarks that show up on the dashboard
 -  8 Apply decay function over search results https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-function-score-query.html
@@ -39,3 +38,4 @@ Increase heap size: `$ sudo sysctl -w vm.max_map_count=262144`
 -  3 Close upload modal with Esc key too
 - 13 Compare with Lunr with view of making this into a standalone WebView app
 -  5 Return filenames from API upload errors and display to user
+- 13 Make use of https://undraw.co/illustrations icons using main color
