@@ -93,10 +93,11 @@ app.post('/api/upload', upload.any(), async (req, res) => {
         throw new Error(`Type ${type} not accepted, upload plain text files`);
       }
 
-      const body = buffer.toString('utf8');
-      if (/\ufffd/.test(body)) {
+      if (buffer.indexOf("\ufffd") !== -1) {
         throw new Error('Upload plain text files');
       }
+
+      const body = buffer.toString('utf8');
 
       let dateObj = new Date(); // default date to now
       let title = '';
