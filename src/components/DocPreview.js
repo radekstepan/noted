@@ -1,7 +1,7 @@
 import React from 'react';
 import cls from 'classnames';
 
-const Doc = props => (
+const DocPreview = props => (
   <div className={cls('doc', {visited: props.visited})}>
     <div className="header">
       <div className="title">{props.filename}</div>
@@ -11,4 +11,4 @@ const Doc = props => (
   </div>
 );
 
-export default Doc;
+export default DocPreview;

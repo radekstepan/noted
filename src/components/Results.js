@@ -5,7 +5,7 @@ import Pagination from 'react-paginating';
 import cls from 'classnames';
 
 import Icon from '../components/Icon';
-import Doc from '../components/Doc';
+import DocPreview from './DocPreview';
 
 const Animation = posed.div({
   enter: {
@@ -76,7 +76,7 @@ class Results extends React.Component {
           <PoseGroup>{results && results.hits.map((doc, index) =>
             <Animation key={doc.id}>
               <div onClick={() => this.onViewDoc(doc.id, index)}>
-                <Doc {...doc} visited={this.state.visited[doc.id]} />
+                <DocPreview {...doc} visited={this.state.visited[doc.id]} />
               </div>
             </Animation>)}
           </PoseGroup>
