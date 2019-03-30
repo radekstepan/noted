@@ -58,6 +58,28 @@ $warning: #d89b29;
     }
   }
 
+  .success {
+    .message {
+      color: $success;
+    }
+    .icon path {
+      fill: $success;
+    }
+  }
+
+  .error {
+    .message {
+      color: $error;
+    }
+    .icon path {
+      fill: $error;
+    }
+  }
+
+  .icon path {
+    fill: #656565;
+  }
+
   #main {
     height: 100%;
   }
@@ -306,14 +328,10 @@ $warning: #d89b29;
         .icon.upload {
           opacity: 0.8;
           width: 120px;
-
-          path {
-            fill: #656565;
-          }
         }
 
         .message {
-          margin-top: 20px;
+          margin: 30px;
           font-family: sans-serif;
           font-weight: bold;
           opacity: 0.9;

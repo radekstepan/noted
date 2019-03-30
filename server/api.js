@@ -103,47 +103,51 @@ app.post('/api/upload', upload.any(), async (req, res) => {
     const files = await map(req.files, async file => {
       const {originalname: filename, mimetype: type, buffer} = file;
 
-      if (!['text/plain', 'application/octet-stream'].includes(type)) {
-        throw new Error(`Type ${type} not accepted, upload plain text files`);
-      }
-
-      if (buffer.indexOf("\ufffd") !== -1) {
-        throw new Error('Upload plain text files');
-      }
-
-      const body = buffer.toString('utf8');
-
-      let dateObj = new Date(); // default date to now
-      let title = '';
-
-      let [line, ...rest] = body.split(EOL);
-      if (rest.length) {
-        let [datePart, titlePart] = line.split('-');
-
-        if (titlePart) {
-          title = titlePart.trim();
+      try {
+        if (!['text/plain', 'application/octet-stream'].includes(type)) {
+          throw new Error(`Type ${type} not accepted, upload plain text files`);
         }
 
-        if (!datePart.match(/20\d\d/)) {
-          throw new Error(`Unrecognized date in "${datePart}"`);
+        if (buffer.indexOf("\ufffd") !== -1) {
+          throw new Error('Upload plain text files');
         }
 
-        dateObj = chrono.parseDate(datePart);
+        const body = buffer.toString('utf8');
+
+        let dateObj = new Date(); // default date to now
+        let title = '';
+
+        let [line, ...rest] = body.split(EOL);
+        if (rest.length) {
+          let [datePart, titlePart] = line.split('-');
+
+          if (titlePart) {
+            title = titlePart.trim();
+          }
+
+          if (!datePart.match(/20\d\d/)) {
+            throw new Error(`Unrecognized date in "${datePart}"`);
+          }
+
+          dateObj = chrono.parseDate(datePart);
+        }
+
+        // 2015-01-01T12:10:30Z
+        const date = dateObj.toISOString().replace(/\.000/, '');
+
+        const id = hasha(filename, {algorithm: 'md5'});
+
+        await api.post(`/noted/doc/${id}`, {
+          filename,
+          title,
+          date,
+          body
+        });
+
+        return {filename, date, title, id};
+      } catch (err) {
+        throw new Error(`${error(err).message} in file "${filename}"`);
       }
-
-      // 2015-01-01T12:10:30Z
-      const date = dateObj.toISOString().replace(/\.000/, '');
-
-      const id = hasha(filename, {algorithm: 'md5'});
-
-      await api.post(`/noted/doc/${id}`, {
-        filename,
-        title,
-        date,
-        body
-      });
-
-      return {filename, date, title, id};
     });
 
     res.json({files});

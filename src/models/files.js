@@ -42,7 +42,11 @@ const files = {
         });
         this.set({uploading: false, count: files.length});
       } catch (err) {
-        this.set({uploading: false, error: `${err}`});
+        let error = `${err}`;
+        if (err.response && err.response.data.error) {
+          error = err.response.data.error;
+        }
+        this.set({uploading: false, error});
       }
     }
   }

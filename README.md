@@ -37,5 +37,4 @@ Increase heap size: `$ sudo sysctl -w vm.max_map_count=262144`
 -  5 With dates add "On this day..." and show entries for this day from previous years
 -  3 Close upload modal with Esc key too
 - 13 Compare with Lunr with view of making this into a standalone WebView app
--  5 Return filenames from API upload errors and display to user
 - 13 Make use of https://undraw.co/illustrations icons using main color

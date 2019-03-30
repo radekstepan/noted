@@ -46,9 +46,9 @@ class FileUpload extends React.Component {
                 <div className="button" onClick={this.onHide}>
                   <Icon name="close" />
                 </div>
-                <div className="body">
+                <div className={cls('body', {error, success: !!count})}>
                   <Icon name="upload" />
-                  <div className={cls('message', {error})}>{message}</div>
+                  <div className="message">{message}</div>
                 </div>
               </div>
             </div>
