@@ -55,7 +55,12 @@ module.exports = api => async (req, res) => {
         }
 
         // 2015-01-01T12:10:30Z
-        const date = dateObj.toISOString().replace(/\.000/, '');
+        const date = {
+          datetime: dateObj.toISOString().replace(/\.000/, ''),
+          year: dateObj.getFullYear(),
+          month: dateObj.getMonth() + 1,
+          day: dateObj.getDate()
+        };
 
         const id = hasha(filename, {algorithm: 'md5'});
 

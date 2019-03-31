@@ -32,6 +32,5 @@ Increase heap size: `$ sudo sysctl -w vm.max_map_count=262144`
 -  5 Use arrow keys to navigate between results
 -  5 Fix search query being unescaped and accepting Regex
 -  5 Show "time ago" in search results titles
--  5 With dates add "On this day..." and show entries for this day from previous years
 - 13 Compare with Lunr with view of making this into a standalone WebView app
 - 13 Make use of https://undraw.co/illustrations icons using main color

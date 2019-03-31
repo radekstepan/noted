@@ -1,10 +1,9 @@
 const error = require('serialize-error');
-const {all: merge} = require('deepmerge');
 
-const query = require('../config/searchQuery');
-const mapHit = require('./mapHit');
+const query = require('./config/searchQuery');
+const {mapDoc} = require('./mapHit');
 
-const {PAGE_LIMIT} = require('../config/const');
+const {PAGE_LIMIT} = require('./config/const');
 
 module.exports = api => async (req, res) => {
   const {query: {q, page}} = req;
@@ -12,12 +11,7 @@ module.exports = api => async (req, res) => {
   const from = page ? parseInt(page, 10) : 1;
 
   try {
-    const {data: {hits: {total, hits}}} = await api.post('/noted/doc/_search', merge([
-      query,
-      {query: {query_string: {query: q}}},
-      {from: PAGE_LIMIT * (from - 1)}
-    ]));
-
+    const {data: {hits: {total, hits}}} = await api.post('/noted/doc/_search', query(q, from - 1));
     if (total && !hits.length) {
       throw new Error(`Page ${page} doesn't exist`);
     }
@@ -27,7 +21,7 @@ module.exports = api => async (req, res) => {
       page: from,
       pages: Math.ceil(total / PAGE_LIMIT),
       limit: PAGE_LIMIT,
-      hits: hits.map(mapHit)
+      hits: hits.map(mapDoc)
     });
   } catch (err) {
     res.status(500);

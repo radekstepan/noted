@@ -10,20 +10,22 @@ class Searchbar extends React.Component {
     this.props.search({q: this.input.current.value})
   , 500);
 
-  goHome = () => {
-    this.props.search({q: this.props.query.q, page: 1});
-  };
-
   componentDidMount() {
-    // Persist search through URL.
-    this.props.search(this.props.query);
+    const {query} = this.props;
+
+    // Persist search through URL or load results for this day.
+    if (query.q) {
+      this.props.search(query);
+    } else {
+      this.props.searchToday();
+    }
   }
 
   render() {
     return (
       <div id="searchbar" className={cls({white: this.props.doc})}>
         <div className="container">
-          <div className="title" onClick={this.goHome}>Noted</div>
+          <div className="title" onClick={this.props.searchToday}>Noted</div>
           <input className="input"
             type="text"
             ref={this.input}
@@ -45,7 +47,8 @@ const mapState = state => ({
 });
 
 const mapDispatch = dispatch => ({
-  search: dispatch.elastic.search
+  search: dispatch.elastic.search,
+  searchToday: dispatch.elastic.searchToday
 });
 
 export default connect(mapState, mapDispatch)(Searchbar);

@@ -57,6 +57,27 @@ const elastic = {
       }
     },
 
+    async searchToday() {
+      this.set({...initialState, loading: true});
+
+      // Modify URL.
+      store.router.effects.navigate(`/`);
+
+      // On this day...
+      const params = {
+        month: 3,
+        day: 31
+      };
+
+      // Make the API call.
+      try {
+        const {data: results} = await api.get(`/search/date`, {params});
+        this.set({loading: false, results});
+      } catch (err) {
+        this.set({loading: false, error: `${err}`});
+      }
+    },
+
     async searchDoc(index, store) {
       const {elastic: {q, page}} = store;
 
