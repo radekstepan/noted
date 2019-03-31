@@ -1,8 +1,8 @@
 $azure_radiance: #007bff;
 $dodger_blue: #4994fd;
 
-$success: #46ab82;
-$error: #e33422;
+$success: #4FBF79;
+$error: #E440C4;
 $warning: #d89b29;
 
 #app {
@@ -62,22 +62,12 @@ $warning: #d89b29;
     .message {
       color: $success;
     }
-    .icon path {
-      fill: $success;
-    }
   }
 
   .error {
     .message {
       color: $error;
     }
-    .icon path {
-      fill: $error;
-    }
-  }
-
-  .icon path {
-    fill: #656565;
   }
 
   #main {
@@ -325,9 +315,25 @@ $warning: #d89b29;
         transform: translateY(-50%);
         user-select: none;
 
-        .icon.upload {
+        .icon {
           opacity: 0.8;
           width: 120px;
+
+          path {
+            fill: #656565;
+          }
+        }
+
+        &.success {
+          .icon path {
+            fill: $success;
+          }
+        }
+
+        &.error {
+          .icon path {
+            fill: $error;
+          }
         }
 
         .message {

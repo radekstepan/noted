@@ -8,6 +8,7 @@ const api = axios.create({
 });
 
 const initialState = {
+  show: false,
   uploading: false,
   error: null,
   count: 0
@@ -23,11 +24,25 @@ const files = {
         ...state,
         ...obj
       };
+    },
+
+    showModal(state) {
+      return {
+        ...state,
+        show: true
+      };
+    },
+
+    hideModal() {
+      return {
+        ...initialState,
+        show: false
+      };
     }
   },
   effects: {
     async upload(files) {
-      this.set({...initialState, uploading: true});
+      this.set({...initialState, show: true, uploading: true});
 
       try {
         let i = 0;

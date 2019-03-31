@@ -24,7 +24,6 @@ Increase heap size: `$ sudo sysctl -w vm.max_map_count=262144`
 
 ## TODO
 
--  5 Use dates from filename as a primary source of dates
 - 13 Favoriting of documents with index keywords from search
 -  8 Bookmarks that show up on the dashboard
 -  8 Apply decay function over search results https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-function-score-query.html

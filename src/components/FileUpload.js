@@ -1,17 +1,15 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import cls from 'classnames';
 import Dropzone from 'react-dropzone';
+import cls from 'classnames';
 
 import Icon from '../components/Icon';
 
 class FileUpload extends React.Component {
 
-  state = {show: false};
+  onShow = () => this.props.showModal();
 
-  onShow = () => this.setState({show: true});
-
-  onHide = () => this.setState({show: false});
+  onHide = () => this.props.hideModal();
 
   componentDidMount() {
     window.addEventListener('dragenter', this.onShow);
@@ -22,7 +20,7 @@ class FileUpload extends React.Component {
   }
 
   render() {
-    const {count, error, uploading} = this.props;
+    const {upload, count, error, uploading, show} = this.props;
 
     let message;
     if (uploading) {
@@ -38,8 +36,8 @@ class FileUpload extends React.Component {
     }
 
     return (
-      <div id="upload" className={cls({show: this.state.show})}>
-        <Dropzone onDrop={this.props.upload}>
+      <div id="upload" className={cls({show})}>
+        <Dropzone onDrop={upload}>
           {({getRootProps}) => (
             <div className="overlay">
               <div className="modal" {...getRootProps()}>
@@ -64,7 +62,9 @@ const mapState = state => {
 };
 
 const mapDispatch = dispatch => ({
-  upload: dispatch.files.upload
+  upload: dispatch.files.upload,
+  showModal: dispatch.files.showModal,
+  hideModal: dispatch.files.hideModal
 });
 
 export default connect(mapState, mapDispatch)(FileUpload);
