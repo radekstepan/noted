@@ -33,7 +33,7 @@ const files = {
       };
     },
 
-    hideModal() {
+    closeModal() {
       return {
         ...initialState,
         show: false

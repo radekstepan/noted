@@ -7,9 +7,12 @@ import Icon from '../components/Icon';
 
 class FileUpload extends React.Component {
 
-  onShow = () => this.props.showModal();
+  onShow = () => {
+    this.props.closeDoc();
+    this.props.showModal();
+  };
 
-  onHide = () => this.props.hideModal();
+  onHide = () => this.props.closeModal();
 
   componentDidMount() {
     window.addEventListener('dragenter', this.onShow);
@@ -36,11 +39,11 @@ class FileUpload extends React.Component {
     }
 
     return (
-      <div id="upload" className={cls({show})}>
+      <div id="upload" className={cls({show})} onMouseDown={this.onHide}>
         <Dropzone onDrop={upload}>
           {({getRootProps}) => (
             <div className="overlay">
-              <div className="modal" {...getRootProps()}>
+              <div className="modal" {...getRootProps()} onMouseDown={e => e.stopPropagation()}>
                 <div className="button" onClick={this.onHide}>
                   <Icon name="close" />
                 </div>
@@ -64,7 +67,8 @@ const mapState = state => {
 const mapDispatch = dispatch => ({
   upload: dispatch.files.upload,
   showModal: dispatch.files.showModal,
-  hideModal: dispatch.files.hideModal
+  closeModal: dispatch.files.closeModal,
+  closeDoc: dispatch.elastic.closeDoc
 });
 
 export default connect(mapState, mapDispatch)(FileUpload);

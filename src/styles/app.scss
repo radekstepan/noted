@@ -33,9 +33,11 @@ $warning: #d89b29;
     bottom: 0;
     width: 100%;
     background: rgba(255,255,255,.75);
+    cursor: pointer;
   }
 
   .modal {
+    cursor: default;
     box-shadow: 0 3px 7px rgba(0,0,0,0.05);
     border: 1px solid #cdcdcd;
     background: #fff;
@@ -80,6 +82,7 @@ $warning: #d89b29;
     position: fixed;
     width: 100%;
     top: 0;
+    box-shadow: 0 5px 5px -5px rgba(0,0,0,0.15);
 
     &.white {
       background: #fff;
@@ -182,7 +185,7 @@ $warning: #d89b29;
         text-align: center;
 
         &.active {
-          background: $azure_radiance;
+          background: $dodger_blue;
           color: #fff;
           font-weight: bold;
           cursor: default;
@@ -214,11 +217,9 @@ $warning: #d89b29;
   #modal {
     .overlay {
       z-index: 1;
-      cursor: pointer;
     }
 
     .modal {
-      cursor: default;
       margin: 25px 0;
 
       .header {

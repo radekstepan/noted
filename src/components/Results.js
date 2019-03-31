@@ -33,7 +33,7 @@ class Results extends React.Component {
   onViewDoc = (id, index) => {
     this.setState({visited: {...this.state.visited, [id]: true}});
     this.props.searchDoc(index + 1);
-  }
+  };
 
   componentDidUpdate(prevProps) {
     // Search has changed.
@@ -53,7 +53,7 @@ class Results extends React.Component {
   }
 
   render() {
-    const {error, results, q, search, closeDoc} = this.props;
+    const {error, results, q, search} = this.props;
 
     // Success message.
     let message;
@@ -70,7 +70,7 @@ class Results extends React.Component {
     }
 
     return (
-      <div id="results" onKeyDown={e => e.key === 'Escape' && closeDoc()}>
+      <div id="results">
         <Scroll>
           <div className="container" ref={this.div} tabIndex="0">
             {error && <div className="message error">{error}</div>}
@@ -124,7 +124,8 @@ const mapState = state => {
 const mapDispatch = dispatch => ({
   search: dispatch.elastic.search,
   searchDoc: dispatch.elastic.searchDoc,
-  closeDoc: dispatch.elastic.closeDoc
+  closeDoc: dispatch.elastic.closeDoc,
+  closeFileUpload: dispatch.files.closeModal
 });
 
 export default connect(mapState, mapDispatch)(Results);
