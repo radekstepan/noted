@@ -56,7 +56,9 @@ module.exports.one = (month, day, from) => ({
   sort: [
     {
       'date.datetime': {
-        order: 'desc'
+        order: 'desc',
+        mode: 'avg',
+        nested_path: 'date'
       }
     }
   ],
