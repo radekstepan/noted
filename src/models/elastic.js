@@ -28,10 +28,13 @@ const elastic = {
     }
   },
   effects: {
-    async search(params) {
+    async search(params = {}) {
       // Clear search.
       if (!params.q) {
-        return this.set({...initialState});
+        if (!params.date) {
+          // Default to today's month/day combination.
+          params.date = new Date().toISOString().substr(5, 5);
+        }
       }
 
       // Make sure we have int on initial search from URL.
@@ -57,34 +60,14 @@ const elastic = {
       }
     },
 
-    async searchToday() {
-      this.set({...initialState, loading: true});
-
-      // Modify URL.
-      store.router.effects.navigate(`/`);
-
-      // On this day...
-      const params = {
-        month: 3,
-        day: 31
-      };
-
-      // Make the API call.
-      try {
-        const {data: results} = await api.get(`/search/date`, {params});
-        this.set({loading: false, results});
-      } catch (err) {
-        this.set({loading: false, error: `${err}`});
-      }
-    },
-
     async searchDoc(index, store) {
-      const {elastic: {q, page}} = store;
+      const {elastic: {q, date, page}} = store;
 
       try {
         const {data: doc} = await api.get(`/search/doc`, {
           params: {
             q,
+            date,
             page,
             index
           }

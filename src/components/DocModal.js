@@ -38,7 +38,7 @@ class DocModal extends React.Component {
                   </div>
                 </div>
                 <Scroll className="body">
-                  <div dangerouslySetInnerHTML={{__html: doc.body[0]}} />
+                  <div dangerouslySetInnerHTML={{__html: doc.body}} />
                 </Scroll>
               </div>
             </div>

@@ -53,7 +53,7 @@ class Results extends React.Component {
   }
 
   render() {
-    const {error, results, q, search} = this.props;
+    const {error, results, q, date, search} = this.props;
 
     // Success message.
     let message;
@@ -91,7 +91,7 @@ class Results extends React.Component {
               <div className="pagination">
                 <div
                   className={cls('page', {disabled: !d.hasPreviousPage})}
-                  onClick={() => d.hasPreviousPage && search({q, page: d.currentPage - 1})}
+                  onClick={() => d.hasPreviousPage && search({q, date, page: d.currentPage - 1})}
                 >
                   <Icon name="left" />
                 </div>
@@ -99,12 +99,12 @@ class Results extends React.Component {
                   <div
                     key={page}
                     className={cls('page', {active: page === d.currentPage})}
-                    onClick={() => page !== d.currentPage && search({q, page})}
+                    onClick={() => page !== d.currentPage && search({q, date, page})}
                   >{page}</div>)
                 }
                 <div
                   className={cls('page', {disabled: !d.hasNextPage})}
-                  onClick={() => d.hasNextPage && search({q, page: d.currentPage + 1})}
+                  onClick={() => d.hasNextPage && search({q, date, page: d.currentPage + 1})}
                 >
                   <Icon name="right" />
                 </div>
