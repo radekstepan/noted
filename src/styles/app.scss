@@ -84,11 +84,9 @@ $highlight: #fff4bd;
 
   #searchbar {
     background: $primary;
-    padding: 25px 0;
     position: fixed;
     width: 100%;
     top: 0;
-    box-shadow: 0 5px 5px -5px rgba(0,0,0,0.15);
 
     &.white {
       background: #fff;
@@ -98,6 +96,7 @@ $highlight: #fff4bd;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      height: 86px;
 
       .title {
         font-size: 30px;
@@ -121,8 +120,8 @@ $highlight: #fff4bd;
   }
 
   #results {
-    padding-top: 90px; // make space for search
-    height: calc(100% - 90px);
+    padding-top: 86px; // make space for search
+    height: calc(100% - 86px);
 
     .container {
       padding: 40px 0;

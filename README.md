@@ -36,4 +36,3 @@ Increase heap size: `$ sudo sysctl -w vm.max_map_count=262144`
 - 13 Make use of https://undraw.co/illustrations icons using main color
 -  5 Make router work when going back in history, perhaps https://router5.js.org/integration/with-redux
 -  5 Fix dragging a text selection and file upload popping up
--  5 Firefox has different searchbar height, fix it so there's no white gabp
