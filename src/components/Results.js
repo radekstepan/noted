@@ -74,7 +74,7 @@ class Results extends React.Component {
         <Scroll>
           <div className="container" ref={this.div} tabIndex="0">
             {error && <div className="message error">{error}</div>}
-            {message && <div className="message success">{message}</div>}
+            {message && <div className={cls('message', {success: message[0] !== '0'})}>{message}</div>}
             <PoseGroup>{results && results.hits.map((doc, index) =>
               <Animation key={doc.id}>
                 <div onClick={() => this.onViewDoc(doc.id, index)}>

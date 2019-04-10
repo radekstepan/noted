@@ -18,19 +18,7 @@ $highlight: #fff4bd;
   .container {
     margin: 0 auto;
     padding: 0 15px;
-
-    @media (min-width: 576px) {
-      max-width: 540px;
-    }
-    @media (min-width: 768px) {
-      max-width: 720px;
-    }
-    @media (min-width: 992px) {
-      max-width: 960px;
-    }
-    @media (min-width: 1200px) {
-      max-width: 1140px;
-    }
+    max-width: 560px;
   }
 
   .overlay {
@@ -124,7 +112,7 @@ $highlight: #fff4bd;
     height: calc(100% - 86px);
 
     .container {
-      padding: 40px 0;
+      padding: 40px 15px;
 
       &:focus {
         outline: none;
@@ -136,17 +124,23 @@ $highlight: #fff4bd;
       margin-top: 45px;
 
       .header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
         .title {
-          display: inline-block;
+          line-height: 1.2;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
         }
 
         .score {
           font-size: 13px;
           padding: 2px 4px;
-          margin-left: 10px;
           border-radius: 2px;
           color: #868e96;
-          display: inline-block;
+          margin-left: 15px;
 
           &.high {
             background: $highlight;
@@ -225,6 +219,10 @@ $highlight: #fff4bd;
       z-index: 1;
     }
 
+    .container {
+      max-width: 612px;
+    }
+
     .modal {
       margin: 25px 0;
 
@@ -232,7 +230,7 @@ $highlight: #fff4bd;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 16px 15px;
+        padding: 15px 25px;
         background: #fafbff;
         border-bottom: 1px solid #efefef;
 
@@ -260,7 +258,7 @@ $highlight: #fff4bd;
       }
 
       .body {
-        padding: 15px;
+        padding: 15px 25px;
         line-height: 1.6;
         white-space: pre-wrap;
         max-height: 84vh;
