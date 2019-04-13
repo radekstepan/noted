@@ -6,8 +6,8 @@ Personal document search engine.
 
 ```bash
 $ nvm use # optional
-$ npm i
-$ docker-compose up # http://localhost:3000
+$ npm install
+$ docker-compose -f docker-compose.yml -f docker-compose.dev.yml up # http://localhost:3000
 ```
 
 ### Init/reset search index

@@ -7,7 +7,7 @@ import history from './history';
 import models from './models/';
 import App from './App';
 
-import './styles/main.css';
+import './styles/main.scss';
 
 const store = init({models});
 

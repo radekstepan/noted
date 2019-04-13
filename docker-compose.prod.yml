@@ -1,0 +1,9 @@
+version: "3"
+services:
+  noted:
+    build: .
+    restart: always
+    ports:
+      - "80:3000"
+    networks:
+      - esnet

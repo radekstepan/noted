@@ -16,19 +16,6 @@ services:
     networks:
       - esnet
 
-  noted:
-    image: "node:10.15.3-slim"
-    command: "npm start"
-    working_dir: /home/radek/dev/noted
-    environment:
-      - NODE_ENV=production
-    volumes:
-      - ./:/home/radek/dev/noted
-    ports:
-      - "3000:3000"
-    networks:
-      - esnet
-
 volumes:
   esdata1:
     driver: local
