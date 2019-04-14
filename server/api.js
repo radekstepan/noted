@@ -1,17 +1,19 @@
-const path = require('path');
-
 const express = require('express');
 const nocache = require('nocache');
 const multer = require('multer');
 const axios = require('axios');
+
+require('dotenv').config();
 
 const searchQuery = require('./searchQuery');
 const searchDoc = require('./searchDoc');
 const fileUpload = require('./fileUpload');
 const deleteIndex = require('./deleteIndex');
 
+const {ES_HOST, ES_PORT, API_PORT} = process.env;
+
 const api = axios.create({
-  baseURL: 'http://elasticsearch:9200'
+  baseURL: `http://${ES_HOST}:${ES_PORT}`
 });
 
 const upload = multer();
@@ -31,4 +33,4 @@ app.post('/api/upload', upload.any(), fileUpload(api));
 // Delete the index.
 app.delete('/api/index', deleteIndex(api));
 
-app.listen(9000);
+app.listen(API_PORT);

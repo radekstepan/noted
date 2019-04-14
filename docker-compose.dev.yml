@@ -1,12 +1,5 @@
 version: "3"
 services:
-  noted:
-    image: "node:10.15.3-slim"
-    command: "npm start"
-    working_dir: /home/radek/dev/noted
-    volumes:
-      - ./:/home/radek/dev/noted
+  elasticsearch:
     ports:
-      - "3000:3000"
-    networks:
-      - esnet
+      - "9200:9200"
