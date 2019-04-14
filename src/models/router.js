@@ -50,8 +50,11 @@ const router = {
     }
   },
   effects: {
-    navigate(pathname, params) {
-      history.push(pathname + qs.stringify(params, true));
+    navigate(args) {
+      if (typeof args === 'string') {
+        history.push(args);
+      }
+      history.push(args.pathname + qs.stringify(args.params, true));
     },
     goBack() {
       history.goBack();

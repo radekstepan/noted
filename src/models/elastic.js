@@ -1,7 +1,5 @@
 import axios from 'axios';
 
-import store from '.';
-
 const api = axios.create({
   baseURL: 'api'
 });
@@ -47,9 +45,6 @@ const elastic = {
         loading: true,
         ...params
       });
-
-      // Modify URL.
-      store.router.effects.navigate(`/`, params);
 
       // Make the API call.
       try {

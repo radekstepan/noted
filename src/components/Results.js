@@ -35,6 +35,16 @@ class Results extends React.Component {
     this.props.searchDoc(index + 1);
   };
 
+  // Use router to navigate to a page.
+  navigate = page => {
+    const params = {
+      page,
+      q: this.props.q,
+      date: this.props.date
+    };
+    this.props.navigate({pathname: '/', params})
+  }
+
   componentDidUpdate(prevProps) {
     // Search has changed.
     if (prevProps.q !== this.props.q) {
@@ -53,7 +63,7 @@ class Results extends React.Component {
   }
 
   render() {
-    const {error, results, q, date, search} = this.props;
+    const {error, results} = this.props;
 
     // Success message.
     let message;
@@ -91,7 +101,7 @@ class Results extends React.Component {
               <div className="pagination">
                 <div
                   className={cls('page', {disabled: !d.hasPreviousPage})}
-                  onClick={() => d.hasPreviousPage && search({q, date, page: d.currentPage - 1})}
+                  onClick={() => d.hasPreviousPage && this.navigate(d.currentPage - 1)}
                 >
                   <Icon name="left" />
                 </div>
@@ -99,12 +109,12 @@ class Results extends React.Component {
                   <div
                     key={page}
                     className={cls('page', {active: page === d.currentPage})}
-                    onClick={() => page !== d.currentPage && search({q, date, page})}
+                    onClick={() => page !== d.currentPage && this.navigate(page)}
                   >{page}</div>)
                 }
                 <div
                   className={cls('page', {disabled: !d.hasNextPage})}
-                  onClick={() => d.hasNextPage && search({q, date, page: d.currentPage + 1})}
+                  onClick={() => d.hasNextPage && this.navigate(d.currentPage + 1)}
                 >
                   <Icon name="right" />
                 </div>
@@ -122,7 +132,7 @@ const mapState = state => {
 };
 
 const mapDispatch = dispatch => ({
-  search: dispatch.elastic.search,
+  navigate: dispatch.router.navigate,
   searchDoc: dispatch.elastic.searchDoc,
   closeDoc: dispatch.elastic.closeDoc,
   closeFileUpload: dispatch.files.closeModal
