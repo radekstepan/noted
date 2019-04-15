@@ -55,6 +55,6 @@ module.exports = api => async (req, res) => {
     });
   } catch (err) {
     res.status(500);
-    res.json({error: error(err).message});
+    res.json({error: err.response.data.error.root_cause.map(r => r.reason).join(', ')});
   }
 };

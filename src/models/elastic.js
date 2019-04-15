@@ -51,7 +51,7 @@ const elastic = {
         const {data: results} = await api.get(`/search`, {params});
         this.set({loading: false, results});
       } catch (err) {
-        this.set({loading: false, error: `${err}`});
+        this.set({loading: false, error: err.response.data.error});
       }
     },
 
