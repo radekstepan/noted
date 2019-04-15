@@ -7,7 +7,8 @@ import Icon from '../components/Icon';
 
 class FileUpload extends React.Component {
 
-  onShow = () => {
+  onShow = evt => {
+    if (!evt.dataTransfer.types.find(t => t === 'Files')) return;
     this.props.closeDoc();
     this.props.showModal();
   };

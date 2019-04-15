@@ -22,9 +22,9 @@ $ docker-compose -f docker-compose.yml -f docker-compose.prod.yml up
 
 ### Note on ports
 
-3000 - React app
-9000 - Express api
-9002 - ElasticSearch instance
+- `3000|80`: React app (public)
+- `9000`: Express api (public only in dev mode)
+- `9002`: ElasticSearch instance (public only in dev mode)
 
 ### Init/reset search index
 
@@ -52,4 +52,3 @@ Increase heap size: `$ sudo sysctl -w vm.max_map_count=262144`
 -  5 Show "time ago" in search results titles
 - 13 Compare with Lunr with view of making this into a standalone WebView app
 - 13 Make use of https://undraw.co/illustrations icons using main color
--  5 Fix dragging a text selection and file upload popping up

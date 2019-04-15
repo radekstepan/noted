@@ -19,7 +19,7 @@ module.exports = api => async (req, res) => {
           throw new Error(`Type ${type} not accepted, upload plain text files`);
         }
 
-        if (buffer.indexOf("\ufffd") !== -1) {
+        if (buffer.indexOf(Buffer.from('\ufffd', 'utf16le')) !== -1) {
           throw new Error('Upload plain text files');
         }
 
