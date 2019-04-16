@@ -82,6 +82,8 @@ class Results extends React.Component {
     return (
       <div id="results">
         <Scroll>
+          <div className="tit">On this day &hellip;</div>
+          <div className="sub">#work-life-balance</div>
           <div className="container" ref={this.div} tabIndex="0">
             {error && <div className="message error">{error}</div>}
             {message && <div className={cls('message', {success: message[0] !== '0'})}>{message}</div>}

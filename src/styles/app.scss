@@ -1,5 +1,5 @@
-$primary: #6573FE;
-$secondary: #5142FF;
+$primary: #2680eb;
+$secondary: #2680eb;
 
 $success: #4FBF79;
 $error: #E440C4;
@@ -17,8 +17,7 @@ $highlight: #fff4bd;
 
   .container {
     margin: 0 auto;
-    padding: 0 15px;
-    max-width: 560px;
+    padding: 0 50px;
   }
 
   .overlay {
@@ -38,7 +37,6 @@ $highlight: #fff4bd;
   }
 
   .title {
-    font-weight: bolder;
     color: $secondary;
   }
 
@@ -71,10 +69,12 @@ $highlight: #fff4bd;
   }
 
   #searchbar {
-    background: $primary;
     position: fixed;
     width: 100%;
     top: 0;
+    border-bottom: 1px solid #e1e1e1;
+    border-top: 5px solid #2680eb;
+    background: #fbfbfd;
 
     &.white {
       background: #fff;
@@ -89,20 +89,25 @@ $highlight: #fff4bd;
       .title {
         font-size: 30px;
         margin-bottom: 2px;
-        color: #fff;
+        color: #222;
         user-select: none;
+        font-weight: bolder;
         cursor: pointer;
       }
 
       .input {
         flex-grow: 1;
         margin: 0 15px;
-        border: 1px solid rgba(153,153,153,.2);
+        border: 1px solid #e1e1e1;
         padding: 7.5px 10px;
         outline: none;
         border-radius: 4px;
         line-height: 1;
         background: #fff;
+
+        &:focus {
+          border-color: #b9b9b9;
+        }
       }
     }
   }
@@ -111,17 +116,53 @@ $highlight: #fff4bd;
     padding-top: 86px; // make space for search
     height: calc(100% - 86px);
 
+    .tit {
+      font-size: 150%;
+      padding: 35px 50px;
+      font-style: italic;
+
+      &::first-letter {
+        font-size: 120%;
+      }
+    }
+    .sub {
+      color: #d2a73e;
+      display: inline-block;
+      background: #d2a73e17;
+      padding: 6px 8px 6px 50px;
+      font-weight: bolder;
+    }
+
     .container {
-      padding: 40px 15px;
+      padding: 40px 50px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      flex-direction: row;
+
+      > div {
+        width: 30%;
+      }
 
       &:focus {
         outline: none;
       }
     }
 
+    .message {
+      display: none;
+    }
+
     .doc {
       cursor: pointer;
-      margin-top: 45px;
+      margin-bottom: 60px;
+
+      .date {
+        color: #d2a73e;
+        font-weight: bolder;
+        font-size: 80%;
+        margin-bottom: 5px;
+      }
 
       .header {
         display: flex;
@@ -133,6 +174,7 @@ $highlight: #fff4bd;
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
+          border-bottom: 1px solid #2680eb42;
         }
 
         .score {
@@ -156,6 +198,7 @@ $highlight: #fff4bd;
         line-height: 1.6;
         overflow-x: hidden;
         text-overflow: ellipsis;
+        font-size: 90%;
 
         em {
           background: $highlight;
@@ -170,7 +213,7 @@ $highlight: #fff4bd;
     }
 
     .pagination {
-      display: flex;
+      display: none;
       justify-content: center;
       align-items: center;
       margin-top: 50px;

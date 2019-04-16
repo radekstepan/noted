@@ -1,13 +1,8 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import Scroll from 'react-perfect-scrollbar';
-import TimeAgo from 'javascript-time-ago';
-import en from 'javascript-time-ago/locale/en';
 
 import Icon from '../components/Icon';
-
-TimeAgo.addLocale(en);
-// const ta = new TimeAgo('en-US');
 
 class DocModal extends React.Component {
   div = React.createRef();

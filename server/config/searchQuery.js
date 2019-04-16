@@ -21,8 +21,8 @@ module.exports.all = (q, from) => ({
   from: PAGE_LIMIT * from,
   highlight: {
     type: 'plain',
-    fragment_size: 100,
-    number_of_fragments: 5,
+    fragment_size: 150,
+    number_of_fragments: 1,
     fields: {
       'body.english': {}
     }
