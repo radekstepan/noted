@@ -3,6 +3,8 @@ services:
   noted:
     build: .
     restart: always
+    environment:
+      - ES_HOST=elasticsearch
     ports:
       - "80:3000"
     networks:

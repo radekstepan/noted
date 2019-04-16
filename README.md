@@ -9,7 +9,7 @@ To run the Node apps locally with ES in Docker:
 ```bash
 $ nvm use # optional
 $ npm install
-$ npm run start-dev # http://localhost:3000
+$ npm run dev # http://localhost:3000
 ```
 
 ### Production
@@ -24,7 +24,7 @@ $ docker-compose -f docker-compose.yml -f docker-compose.prod.yml up
 
 - `3000|80`: React app (public)
 - `9000`: Express api (public only in dev mode)
-- `9002`: ElasticSearch instance (public only in dev mode)
+- `9200`: ElasticSearch instance (public only in dev mode)
 
 ### Init/reset search index
 
