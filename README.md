@@ -43,14 +43,17 @@ Increase heap size: `$ sudo sysctl -w vm.max_map_count=262144`
 ## TODO
 
 - 13 A dashboard of "On this day..." results
+- 13 Bookmarks that show up on the dashboard; favorites.txt save documents index in a new ES collection. When reindex discard this cached response.
+-  8 Remove title and date line from text and either use the title or parse filename and convert (ive = I've, when stays lowercase etc.)
+-  8 Use CSS grid for displaying articles, rather than just 3-up
+-  5 Cleanup all CSS after finishing dashboard work
+-  5 Set correct timezone from the request of the user
+-  5 Keep updating page title with query changes
+-  3 Move deep diff of previous and new search state into reducer
+
 - 13 Favoriting of documents with index keywords from search
--  8 Bookmarks that show up on the dashboard
 -  8 Apply decay function over search results https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-function-score-query.html
 -  5 Search results sorted by date (filename)
 - 13 User accounts
 -  5 Use arrow keys to navigate between results
--  5 Set correct timezone from the request of the user
--  8 Remove title and date line from text and either use the title or parse filename and convert (ive = I've, when stays lowercase etc.)
--  3 Move deep diff of previous and new search state into reducer
-- 13 favorites.txt save documents index in a new ES collection. When reindex discard this cached response.
--  8 Use CSS grid for displaying articles, rather than just 3-up
+-  5 Clear search input when going back in history to a "date" result
