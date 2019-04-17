@@ -2,7 +2,7 @@ const error = require('serialize-error');
 
 const {all: searchQuery} = require('./config/searchQuery');
 const {all: searchDate} = require('./config/searchDate');
-const {mapDoc, mapDate, truncate} = require('./mapHit');
+const {mapSearch, mapDoc, truncate} = require('./mapHit');
 
 const {PAGE_LIMIT} = require('./config/const');
 
@@ -28,7 +28,7 @@ module.exports = api => async (req, res) => {
         page: from,
         pages: Math.ceil(total / PAGE_LIMIT),
         limit: PAGE_LIMIT,
-        hits: hits.map(mapDoc)
+        hits: hits.map(mapSearch)
       });
     }
 
@@ -51,7 +51,7 @@ module.exports = api => async (req, res) => {
       page: from,
       pages: Math.ceil(total / PAGE_LIMIT),
       limit: PAGE_LIMIT,
-      hits: hits.map(mapDate).map(truncate)
+      hits: hits.map(mapDoc).map(truncate)
     });
   } catch (err) {
     res.status(500);

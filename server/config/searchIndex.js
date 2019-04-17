@@ -3,7 +3,7 @@ module.exports = () => ({
     doc: {
       properties: {
         filename: {
-          type: 'text'
+          type: 'keyword'
         },
         date: {
           type: 'nested',

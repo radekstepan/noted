@@ -1,5 +1,4 @@
 $primary: #2680eb;
-$secondary: #2680eb;
 
 $success: #4FBF79;
 $error: #E440C4;
@@ -25,7 +24,7 @@ $highlight: #fff4bd;
     top: 0;
     bottom: 0;
     width: 100%;
-    background: rgba(255,255,255,.75);
+    background: rgba(255,255,255,.85);
     cursor: pointer;
   }
 
@@ -37,7 +36,7 @@ $highlight: #fff4bd;
   }
 
   .title {
-    color: $secondary;
+    color: $primary;
   }
 
   .message {
@@ -73,8 +72,9 @@ $highlight: #fff4bd;
     width: 100%;
     top: 0;
     border-bottom: 1px solid #e1e1e1;
-    border-top: 5px solid #2680eb;
-    background: #fbfbfd;
+    border-top: 5px solid $primary;
+    background: #f2f6f9;
+    z-index: 1;
 
     &.white {
       background: #fff;
@@ -98,16 +98,12 @@ $highlight: #fff4bd;
       .input {
         flex-grow: 1;
         margin: 0 15px;
-        border: 1px solid #e1e1e1;
-        padding: 7.5px 10px;
+        border: 0;
+        padding: 7.5px 14px;
         outline: none;
         border-radius: 4px;
         line-height: 1;
-        background: #fff;
-
-        &:focus {
-          border-color: #b9b9b9;
-        }
+        background: #d9e1ec;
       }
     }
   }
@@ -259,7 +255,7 @@ $highlight: #fff4bd;
 
   #modal {
     .overlay {
-      z-index: 1;
+      z-index: 2;
     }
 
     .container {

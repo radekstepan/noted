@@ -1,6 +1,6 @@
 const trunc = require('smart-truncate');
 
-module.exports.mapDoc = hit => ({
+module.exports.mapSearch = hit => ({
   id: hit._id,
   score: hit._score,
   filename: hit._source.filename,
@@ -9,7 +9,7 @@ module.exports.mapDoc = hit => ({
   body: hit.highlight['body.english'].join('&hellip; ')
 });
 
-module.exports.mapDate = hit => ({
+module.exports.mapDoc = hit => ({
   id: hit._id,
   filename: hit._source.filename,
   date: hit._source.date.datetime,
@@ -19,5 +19,5 @@ module.exports.mapDate = hit => ({
 
 module.exports.truncate = hit => ({
   ...hit,
-  body: trunc(hit.body, 300)
+  body: trunc(hit.body, 150)
 });

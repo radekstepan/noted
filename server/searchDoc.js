@@ -2,7 +2,7 @@ const error = require('serialize-error');
 
 const {one: searchQuery} = require('./config/searchQuery');
 const {one: searchDate} = require('./config/searchDate');
-const {mapDoc, mapDate} = require('./mapHit');
+const {mapSearch, mapDoc} = require('./mapHit');
 
 const {PAGE_LIMIT} = require('./config/const');
 
@@ -33,7 +33,7 @@ module.exports = api => async (req, res) => {
         throw new Error(`Document on page '${page}' index '${index}' does't exist`);
       }
 
-      return res.json(mapDoc(hits[0]));
+      return res.json(mapSearch(hits[0]));
     }
 
     // Date query.
@@ -51,7 +51,7 @@ module.exports = api => async (req, res) => {
       throw new Error(`Document on page '${page}' index '${index}' does't exist`);
     }
 
-    return res.json(mapDate(hits[0]));
+    return res.json(mapDoc(hits[0]));
   } catch (err) {
     res.status(500);
     res.json({error: error(err).message});

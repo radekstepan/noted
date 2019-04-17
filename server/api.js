@@ -5,6 +5,7 @@ const axios = require('axios');
 
 const searchQuery = require('./searchQuery');
 const searchDoc = require('./searchDoc');
+const getDoc = require('./getDoc');
 const fileUpload = require('./fileUpload');
 const deleteIndex = require('./deleteIndex');
 
@@ -24,6 +25,9 @@ app.get('/api/search', searchQuery(api));
 
 // Search a single doc.
 app.get('/api/search/doc', searchDoc(api));
+
+// Get a doc
+app.get('/api/doc/:id', getDoc(api));
 
 // File upload.
 app.post('/api/upload', upload.any(), fileUpload(api));
