@@ -1,6 +1,4 @@
-const {PAGE_LIMIT} = require('./const');
-
-const _source = ['filename', 'date', 'title'];
+const {PAGE_LIMIT, FRAGMENT_SIZE, FIELDS} = require('./const');
 
 const query = q => ({
   query_string: {
@@ -15,13 +13,13 @@ const query = q => ({
 });
 
 module.exports.all = (q, from) => ({
-  _source,
+  _source: FIELDS,
   query: query(q),
   size: PAGE_LIMIT,
   from: PAGE_LIMIT * from,
   highlight: {
     type: 'plain',
-    fragment_size: 150,
+    fragment_size: FRAGMENT_SIZE,
     number_of_fragments: 1,
     fields: {
       'body.english': {}
@@ -30,7 +28,7 @@ module.exports.all = (q, from) => ({
 });
 
 module.exports.one = (q, from) => ({
-  _source,
+  _source: FIELDS,
   query: query(q),
   size: 1,
   from,

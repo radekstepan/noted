@@ -51,7 +51,7 @@ module.exports = api => async (req, res) => {
       throw new Error(`Document on page '${page}' index '${index}' does't exist`);
     }
 
-    return res.json(mapDoc(hits[0]));
+    res.json(mapDoc(hits[0]));
   } catch (err) {
     res.status(500);
     res.json({error: error(err).message});

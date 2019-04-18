@@ -43,9 +43,9 @@ Increase heap size: `$ sudo sysctl -w vm.max_map_count=262144`
 ## TODO
 
 - 13 A dashboard of "On this day..." results
-- 13 Bookmarks that show up on the dashboard; favorites.txt save documents index in a new ES collection. When reindex discard this cached response.
+-  8 Bookmarks that show up on the dashboard, update API to remap from tag to filename and truncate body
 -  8 Remove title and date line from text and either use the title or parse filename and convert (ive = I've, when stays lowercase etc.)
--  8 Use CSS grid for displaying articles, rather than just 3-up
+-  8 Use CSS grid for displaying articles, rather than just 3-up, deal with page always having an even number of content
 -  5 Cleanup all CSS after finishing dashboard work
 -  5 Set correct timezone from the request of the user
 -  5 Keep updating page title with query changes
@@ -56,4 +56,7 @@ Increase heap size: `$ sudo sysctl -w vm.max_map_count=262144`
 -  5 Search results sorted by date (filename)
 - 13 User accounts
 -  5 Use arrow keys to navigate between results
+-  5 Switch to a consistent API error handler from ES
 -  5 Clear search input when going back in history to a "date" result
+-  5 Existing bookmarks do not get cleared first
+-  3 Rename bookmarks to tags, it's shorter...

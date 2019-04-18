@@ -1,11 +1,11 @@
 const {FIELDS} = require('./const');
 
-module.exports = filename => ({
+module.exports = () => ({
   _source: FIELDS,
   query: {
-    term: {
-      filename
+    exists: {
+      field: 'bookmarks'
     }
   },
-  size: 1
+  size: 1e4
 });
