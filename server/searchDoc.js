@@ -27,7 +27,7 @@ module.exports = api => async (req, res) => {
 
     // Text query.
     if (q) {
-      const {data: {hits: {hits}}} = await api.post('/noted/doc/_search', searchQuery(q, from));
+      const {data: {hits: {hits}}} = await api.post('/noted/_search', searchQuery(q, from));
 
       if (!hits.length) {
         throw new Error(`Document on page '${page}' index '${index}' does't exist`);
@@ -45,7 +45,7 @@ module.exports = api => async (req, res) => {
       throw new Error(`Day ${day} is invalid`);
     }
 
-    const {data: {hits: {hits}}} = await api.post('/noted/doc/_search', searchDate(month, day, from));
+    const {data: {hits: {hits}}} = await api.post('/noted/_search', searchDate(month, day, from));
 
     if (!hits.length) {
       throw new Error(`Document on page '${page}' index '${index}' does't exist`);

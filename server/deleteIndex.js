@@ -1,5 +1,3 @@
-const error = require('serialize-error');
-
 const query = require('./config/searchIndex');
 
 module.exports = api => async (req, res) => {
@@ -14,6 +12,6 @@ module.exports = api => async (req, res) => {
     res.status(204).send({});
   } catch (err) {
     res.status(500);
-    res.json({error: error(err).message});
+    res.json({error: err.response.data.error});
   }
 }

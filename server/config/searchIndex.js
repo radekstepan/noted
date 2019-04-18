@@ -1,37 +1,38 @@
 module.exports = () => ({
   mappings: {
-    doc: {
-      properties: {
-        filename: {
-          type: 'keyword'
-        },
-        date: {
-          type: 'nested',
-          properties: {
-            datetime: {
-              type: 'date'
-            },
-            year: {
-              type: 'short'
-            },
-            month: {
-              type: 'short'
-            },
-            day: {
-              type: 'short'
-            }
+    properties: {
+      filename: {
+        type: 'keyword'
+      },
+      date: {
+        type: 'nested',
+        properties: {
+          datetime: {
+            type: 'date'
+          },
+          year: {
+            type: 'short'
+          },
+          month: {
+            type: 'short'
+          },
+          day: {
+            type: 'short'
           }
-        },
-        title: {
-          type: 'text'
-        },
-        body: {
-          type: 'text',
-          fields: {
-            english: {
-              type: 'text',
-              analyzer: 'english_noted'
-            }
+        }
+      },
+      bookmarks: {
+        type: 'keyword'
+      },
+      title: {
+        type: 'text'
+      },
+      body: {
+        type: 'text',
+        fields: {
+          english: {
+            type: 'text',
+            analyzer: 'english_noted'
           }
         }
       }

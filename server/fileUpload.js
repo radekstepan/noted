@@ -64,7 +64,7 @@ module.exports = api => async (req, res) => {
 
         const id = hasha(filename, {algorithm: 'md5'});
 
-        await api.post(`/noted/doc/${id}`, {
+        await api.post(`/noted/_doc/${id}`, {
           filename,
           title,
           date,
@@ -73,6 +73,7 @@ module.exports = api => async (req, res) => {
 
         return {filename, date, title, id};
       } catch (err) {
+        console.log(err);
         throw new Error(`${error(err).message} in file "${filename}"`);
       }
     });
