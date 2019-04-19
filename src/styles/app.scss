@@ -112,41 +112,40 @@ $highlight: #fff4bd;
     padding-top: 86px; // make space for search
     height: calc(100% - 86px);
 
-    .tit {
-      font-size: 150%;
-      padding: 35px 50px;
-      font-style: italic;
-
-      &::first-letter {
-        font-size: 120%;
-      }
-    }
-    .sub {
-      color: #d2a73e;
-      display: inline-block;
-      background: #d2a73e17;
-      padding: 6px 8px 6px 50px;
-      font-weight: bolder;
-    }
-
     .container {
       padding: 40px 50px;
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      flex-direction: row;
-
-      > div {
-        width: 30%;
-      }
 
       &:focus {
         outline: none;
       }
     }
 
-    .message {
-      display: none;
+    .category {
+      font-size: 26px;
+      font-style: italic;
+      margin-bottom: 30px;
+      user-select: none;
+
+      &::first-letter {
+        font-size: 32px;
+      }
+    }
+
+    .sub {
+      display: inline-block;
+      margin-bottom: 20px;
+      font-weight: bolder;
+    }
+
+    .flex {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      flex-direction: row;
+
+      .doc {
+        width: 30%;
+      }
     }
 
     .doc {

@@ -7,5 +7,16 @@ module.exports = () => ({
       field: 'tags'
     }
   },
+  sort: [
+    {
+      'date.datetime': {
+        order: 'desc',
+        mode: 'avg',
+        nested: {
+          path: 'date'
+        }
+      }
+    }
+  ],
   size: 1e4
 });

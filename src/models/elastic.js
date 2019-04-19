@@ -7,9 +7,13 @@ const api = axios.create({
 const initialState = {
   loading: false,
   error: null,
+  // Search results.
   q: '',
   page: 1,
   results: null,
+  // Tags.
+  tags: null,
+  // Single doc.
   doc: null
 };
 
@@ -48,7 +52,7 @@ const elastic = {
 
       // Make the API call.
       try {
-        const {data: results} = await api.get(`/search`, {params});
+        const {data: results} = await api.get('/search', {params});
         this.set({loading: false, results});
       } catch (err) {
         this.set({loading: false, error: err.response.data.error});
@@ -58,18 +62,25 @@ const elastic = {
     async searchDoc(index, store) {
       const {elastic: {q, date, page}} = store;
 
+      const {data: doc} = await api.get('/search/doc', {
+        params: {
+          q,
+          date,
+          page,
+          index
+        }
+      });
+      this.set({doc});
+    },
+
+    async getTags() {
+      this.set({tags: null, loading: true});
+
       try {
-        const {data: doc} = await api.get(`/search/doc`, {
-          params: {
-            q,
-            date,
-            page,
-            index
-          }
-        });
-        this.set({doc});
+        const {data: {total, tags}} = await api.get('/tags');
+        this.set({loading: false, tags: total ? tags : null});
       } catch (err) {
-        // TODO handle
+        this.set({loading: false, error: `${err}`});
       }
     },
 

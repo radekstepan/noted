@@ -1,10 +1,11 @@
 import React from 'react';
 import {connect} from 'react-redux';
 
-import Searchbar from '../components/Searchbar';
-import Results from '../components/Results';
-import DocModal from '../components/DocModal';
 import FileUpload from '../components/FileUpload';
+import DocModal from '../components/DocModal';
+import Searchbar from '../components/Searchbar';
+import Tags from '../components/Tags';
+// import Results from '../components/Results';
 
 class Dashboard extends React.Component {
 
@@ -19,7 +20,8 @@ class Dashboard extends React.Component {
         <FileUpload />
         <DocModal />
         <Searchbar />
-        <Results />
+        <Tags />
+        {/*<Results />*/}
       </div>
     );
   };
