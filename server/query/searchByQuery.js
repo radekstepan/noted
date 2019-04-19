@@ -1,4 +1,4 @@
-const {PAGE_LIMIT, FRAGMENT_SIZE, FIELDS} = require('./const');
+const {PAGE_LIMIT, FRAGMENT_SIZE, ALL_FIELDS} = require('../const');
 
 const query = q => ({
   query_string: {
@@ -13,7 +13,7 @@ const query = q => ({
 });
 
 module.exports.all = (q, from) => ({
-  _source: FIELDS,
+  _source: ALL_FIELDS,
   query: query(q),
   size: PAGE_LIMIT,
   from: PAGE_LIMIT * from,
@@ -28,7 +28,7 @@ module.exports.all = (q, from) => ({
 });
 
 module.exports.one = (q, from) => ({
-  _source: FIELDS,
+  _source: ALL_FIELDS,
   query: query(q),
   size: 1,
   from,

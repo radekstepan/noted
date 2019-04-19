@@ -21,7 +21,7 @@ module.exports = () => ({
           }
         }
       },
-      bookmarks: {
+      tags: {
         type: 'keyword'
       },
       title: {

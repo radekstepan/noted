@@ -1,28 +1,25 @@
-const express = require('express');
 const nocache = require('nocache');
 const multer = require('multer');
-const axios = require('axios');
 
-const searchQuery = require('./searchQuery');
+const express = require('./express');
+const elasticApi = require('./elasticApi');
+const searchByQuery = require('./searchByQuery');
 const searchDoc = require('./searchDoc');
 const getDoc = require('./getDoc');
-const getBookmarks = require('./getBookmarks');
+const getTags = require('./getTags');
 const fileUpload = require('./fileUpload');
 const deleteIndex = require('./deleteIndex');
 
 const {ES_HOST='0.0.0.0', ES_PORT=9200} = process.env;
 
-const api = axios.create({
-  baseURL: `http://${ES_HOST}:${ES_PORT}`
-});
-
+const api = elasticApi(ES_HOST, ES_PORT);
 const upload = multer();
 const app = express();
 
 app.use(nocache());
 
 // Query search for text or date.
-app.get('/api/search', searchQuery(api));
+app.get('/api/search', searchByQuery(api));
 
 // Search a single doc.
 app.get('/api/search/doc', searchDoc(api));
@@ -30,8 +27,8 @@ app.get('/api/search/doc', searchDoc(api));
 // Get a doc.
 app.get('/api/doc/:id', getDoc(api));
 
-// Get bookmarks.
-app.get('/api/bookmarks', getBookmarks(api));
+// Get tags.
+app.get('/api/tags', getTags(api));
 
 // File upload.
 app.post('/api/upload', upload.any(), fileUpload(api));

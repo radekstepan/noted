@@ -1,13 +1,13 @@
 const trunc = require('smart-truncate');
 
-const {FRAGMENT_SIZE} = require('./config/const');
+const {FRAGMENT_SIZE} = require('../const');
 
 module.exports.mapSearch = hit => ({
   id: hit._id,
   score: hit._score,
   filename: hit._source.filename,
   date: hit._source.date.datetime,
-  bookmarks: hit._source.bookmarks,
+  tags: hit._source.tags,
   title: hit._source.title,
   body: hit.highlight['body.english'].join('&hellip; ')
 });
@@ -16,7 +16,7 @@ module.exports.mapDoc = hit => ({
   id: hit._id,
   filename: hit._source.filename,
   date: hit._source.date.datetime,
-  bookmarks: hit._source.bookmarks,
+  tags: hit._source.tags,
   title: hit._source.title,
   body: hit._source.body
 });

@@ -1,4 +1,4 @@
-const query = require('./config/searchIndex');
+const query = require('./query/createIndex');
 
 module.exports = api => async (req, res) => {
   try {
@@ -7,11 +7,6 @@ module.exports = api => async (req, res) => {
     // Silently fail if index doesn't exist.
   }
 
-  try {
-    await api.put('/noted', query());
-    res.status(204).send({});
-  } catch (err) {
-    res.status(500);
-    res.json({error: err.response.data.error});
-  }
+  await api.put('/noted', query());
+  res.status(204).send({});
 }

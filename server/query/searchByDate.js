@@ -1,4 +1,4 @@
-const {PAGE_LIMIT, FIELDS} = require('./const');
+const {PAGE_LIMIT, ALL_FIELDS} = require('../const');
 
 const query = (month, day) => ({
   nested: {
@@ -32,7 +32,7 @@ const sort = [
 ];
 
 module.exports.all = (month, day, from) => ({
-  _source: FIELDS,
+  _source: ALL_FIELDS,
   query: query(month, day),
   sort,
   size: PAGE_LIMIT,
@@ -40,7 +40,7 @@ module.exports.all = (month, day, from) => ({
 });
 
 module.exports.one = (month, day, from) => ({
-  _source: FIELDS,
+  _source: ALL_FIELDS,
   query: query(month, day),
   sort,
   size: 1,

@@ -1,7 +1,7 @@
-const {FIELDS} = require('./const');
+const {ALL_FIELDS} = require('../const');
 
 module.exports = filename => ({
-  _source: FIELDS,
+  _source: ALL_FIELDS,
   query: {
     term: {
       filename

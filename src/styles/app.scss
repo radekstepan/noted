@@ -71,9 +71,9 @@ $highlight: #fff4bd;
     position: fixed;
     width: 100%;
     top: 0;
-    border-bottom: 1px solid #e1e1e1;
+    border-bottom: 1px solid #e7e7e7;
     border-top: 5px solid $primary;
-    background: #f2f6f9;
+    background: #f6f7fc;
     z-index: 1;
 
     &.white {
@@ -89,7 +89,7 @@ $highlight: #fff4bd;
       .title {
         font-size: 30px;
         margin-bottom: 2px;
-        color: #222;
+        color: $primary;
         user-select: none;
         font-weight: bolder;
         cursor: pointer;
@@ -98,12 +98,12 @@ $highlight: #fff4bd;
       .input {
         flex-grow: 1;
         margin: 0 15px;
-        border: 1px solid #ccc;
+        border: 1px solid $primary;
         padding: 7.5px 12px;
         outline: none;
         border-radius: 4px;
         line-height: 1;
-        background: #d9e1ec;
+        background: #fff;
       }
     }
   }

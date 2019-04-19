@@ -2,10 +2,12 @@ const error = require('serialize-error');
 const {mapSeries: map} = require('p-iteration');
 const hasha = require('hasha');
 
-const parseDoc = require('./parseDoc');
-const parseBookmarks = require('./parseBookmarks');
-const searchByName = require('./config/searchByName');
-const updateTag = require('./config/updateTag');
+const searchByName = require('./query/searchByName');
+const updateTag = require('./query/updateTag');
+const parseDoc = require('./utils/parseDoc');
+const parseTags = require('./utils/parseTags');
+
+const {TAGS_FILE} = require('./const');
 
 module.exports = api => async (req, res) => {
   try {
@@ -27,10 +29,10 @@ module.exports = api => async (req, res) => {
 
         const body = buffer.toString('utf8');
 
-        // Bookmarks file?
-        if (filename === 'bookmarks.txt') {
-          const list = parseBookmarks(body);
-          // Update the documents with bookmarks.
+        // Tags file?
+        if (filename === TAGS_FILE) {
+          const list = parseTags(body);
+          // Update the documents with tags.
           await map(list, async ([filename, tag]) => {
             const {data: {hits: {hits}}} = await api.post('/noted/_search', searchByName(filename));
             if (!hits.length) {
@@ -38,9 +40,10 @@ module.exports = api => async (req, res) => {
             }
             await api.post(`/noted/_update/${hits[0]._id}`, updateTag(tag));
           });
-          return {bookmarks: true};
+          return {tags: true};
         }
 
+        // Handle a document.
         const {title, date} = parseDoc(filename, body);
         const id = hasha(filename, {algorithm: 'md5'});
 
@@ -48,8 +51,8 @@ module.exports = api => async (req, res) => {
           filename,
           title,
           date,
-          bookmarks: [],
-          body
+          body,
+          tags: []
         });
 
         return {filename, date, title, id};

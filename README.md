@@ -56,7 +56,5 @@ Increase heap size: `$ sudo sysctl -w vm.max_map_count=262144`
 -  5 Search results sorted by date (filename)
 - 13 User accounts
 -  5 Use arrow keys to navigate between results
--  5 Switch to a consistent API error handler from ES
 -  5 Clear search input when going back in history to a "date" result
 -  5 Existing bookmarks do not get cleared first
--  3 Rename bookmarks to tags, it's shorter...
