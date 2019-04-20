@@ -10,8 +10,9 @@
     "coverage": "npm test -- --coverage",
     "run-app": "react-scripts start",
     "run-server": "node server/",
-    "start": "concurrently 'npm:run-*'",
-    "dev": "concurrently 'npm:run-*' 'docker-compose -f docker-compose.yml -f docker-compose.dev.yml up'",
+    "run-server-dev": "node server/watch.js",
+    "start": "concurrently 'npm:run-app' 'npm:run-server'",
+    "dev": "concurrently 'npm:run-app' 'npm:run-server-dev' 'docker-compose -f docker-compose.yml -f docker-compose.dev.yml up'",
     "test": "CI=true react-scripts test --env=jsdom",
     "watch-test": "react-scripts test --env=jsdom"
   },

@@ -1,16 +1,39 @@
-const nodemon = require('nodemon');
+const nocache = require('nocache');
+const multer = require('multer');
 
-nodemon({
-  script: 'server/api.js',
-  ext: 'js json',
-  watch: ['server']
-});
+const express = require('./express');
+const elasticApi = require('./elasticApi');
+const searchByQuery = require('./searchByQuery');
+const searchDoc = require('./searchDoc');
+const getDoc = require('./getDoc');
+const getTags = require('./getTags');
+const fileUpload = require('./fileUpload');
+const deleteIndex = require('./deleteIndex');
 
-nodemon.on('start', () =>
-  console.log('API server has started')
-).on('quit', () => {
-  console.log('API server has quit');
-  process.exit();
-}).on('restart', files =>
-  console.log('API server is restarting due to changes in: ', files)
-);
+const {ES_HOST='0.0.0.0', ES_PORT=9200} = process.env;
+
+const api = elasticApi(ES_HOST, ES_PORT);
+const upload = multer();
+const app = express();
+
+app.use(nocache());
+
+// Query search for text or date.
+app.get('/api/search', searchByQuery(api));
+
+// Search a single doc.
+app.get('/api/search/doc', searchDoc(api));
+
+// Get a doc.
+app.get('/api/doc/:id', getDoc(api));
+
+// Get tags.
+app.get('/api/tags', getTags(api));
+
+// File upload.
+app.post('/api/upload', upload.any(), fileUpload(api));
+
+// Delete the index.
+app.delete('/api/index', deleteIndex(api));
+
+app.listen(9000);
