@@ -37,12 +37,7 @@ class Results extends React.Component {
 
   // Use router to navigate to a page.
   navigate = page => {
-    const params = {
-      page,
-      q: this.props.q,
-      date: this.props.date
-    };
-    this.props.navigate({pathname: '/', params})
+    this.props.navigate(`/${this.props.q}/${page}`);
   }
 
   componentDidUpdate(prevProps) {

@@ -52,7 +52,7 @@ const router = {
   effects: {
     navigate(args) {
       if (typeof args === 'string') {
-        history.push(args);
+        return history.push(args);
       }
       history.push(args.pathname + qs.stringify(args.params, true));
     },

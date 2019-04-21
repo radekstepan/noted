@@ -9,7 +9,7 @@ class Searchbar extends React.Component {
 
   // Change URL on user input.
   onSearch = debounce(() =>
-    this.props.navigate({pathname: '/', params: {q: this.input.current.value}})
+    this.props.navigate(`/${encodeURIComponent(this.input.current.value)}`)
   , 500);
 
   // Trigger search through persisted URL.
@@ -46,7 +46,7 @@ class Searchbar extends React.Component {
 }
 
 const mapState = state => ({
-  query: state.router.query,
+  query: state.router.params,
   doc: state.elastic.doc
 });
 
