@@ -10,7 +10,14 @@ module.exports = api => async (req, res) => {
     res.json(mapDoc(data));
   } catch (err) {
     // Search for the filename then.
-    const {data: {hits: {hits}}} = await api.post('/noted/_search', query(id));
+    const {
+      data: {
+        hits: {
+          hits
+        }
+      }
+    } = await api.post('/noted/_search', query(id));
+
     if (!hits.length) {
       throw new Error(`Document '${id}' does't exist`);
     }

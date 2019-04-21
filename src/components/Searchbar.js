@@ -1,6 +1,5 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import cls from 'classnames';
 import debounce from 'debounce';
 import {diff} from 'deep-diff';
 
@@ -27,7 +26,7 @@ class Searchbar extends React.Component {
 
   render() {
     return (
-      <div id="searchbar" className={cls({white: this.props.doc})}>
+      <div id="searchbar">
         <div className="container">
           <div className="title" onClick={() => this.props.navigate('/')}>Noted</div>
           <input className="input"

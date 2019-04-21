@@ -6,6 +6,7 @@ const elasticApi = require('./elasticApi');
 const searchByQuery = require('./searchByQuery');
 const searchDoc = require('./searchDoc');
 const getDoc = require('./getDoc');
+const getToday = require('./getToday');
 const getTags = require('./getTags');
 const fileUpload = require('./fileUpload');
 const deleteIndex = require('./deleteIndex');
@@ -26,6 +27,9 @@ app.get('/api/search/doc', searchDoc(api));
 
 // Get a doc.
 app.get('/api/doc/:id', getDoc(api));
+
+// Get docs on this day.
+app.get('/api/today', getToday(api));
 
 // Get tags.
 app.get('/api/tags', getTags(api));

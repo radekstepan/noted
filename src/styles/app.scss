@@ -1,7 +1,7 @@
 $primary: #2680eb;
 
-$success: #4FBF79;
-$error: #E440C4;
+$success: #3ca764;
+$error: #cc54b4;
 $warning: #d89b29;
 
 $highlight: #fff4bd;
@@ -75,10 +75,6 @@ $highlight: #fff4bd;
     border-top: 5px solid $primary;
     background: #f6f7fc;
     z-index: 1;
-
-    &.white {
-      background: #fff;
-    }
 
     .container {
       display: flex;

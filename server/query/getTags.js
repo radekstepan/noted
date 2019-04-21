@@ -1,4 +1,4 @@
-const {ALL_FIELDS} = require('../const');
+const {ALL_FIELDS, MAX_SIZE} = require('../const');
 
 module.exports = () => ({
   _source: ALL_FIELDS,
@@ -18,5 +18,5 @@ module.exports = () => ({
       }
     }
   ],
-  size: 1e4
+  size: MAX_SIZE
 });

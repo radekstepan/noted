@@ -10,7 +10,9 @@ import Searchbar from './components/Searchbar';
 
 class App extends React.Component {
 
-  closeModals = () => {
+  closeModals = e => {
+    if (e.key !== 'Escape') return;
+
     this.props.closeDoc();
     this.props.closeFileUpload();
   };
@@ -22,7 +24,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div id="main" onKeyDown={e => e.key === 'Escape' && this.closeModals()}>
+      <div id="main" onKeyDown={this.closeModals}>
         <FileUpload />
         <DocModal />
         <Searchbar />

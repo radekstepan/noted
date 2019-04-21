@@ -8,3 +8,4 @@ module.exports.ALL_FIELDS = [
   'body'
 ];
 module.exports.TAGS_FILE = 'tags.txt';
+module.exports.MAX_SIZE = 1e4;

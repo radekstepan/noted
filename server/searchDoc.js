@@ -1,16 +1,13 @@
-const error = require('serialize-error');
+const {one: query} = require('./query/searchByQuery');
+const {mapSearch} = require('./utils/mapHit');
 
-const {one: searchQuery} = require('./query/searchByQuery');
-const {one: searchDate} = require('./query/searchByDate');
-const {mapSearch, mapDoc} = require('./utils/mapHit');
-
-const {PAGE_LIMIT} = require('./const');
+const {PAGE_LIMIT, MAX_SIZE} = require('./const');
 
 module.exports = api => async (req, res) => {
-  const {query: {q, date, page, index}} = req;
+  const {query: {q, page, index}} = req;
 
-  if (!q && !date) {
-    throw new Error('Either `q` or `date` parameter has to be provided');
+  if (!q) {
+    throw new Error('Missing `q` parameter');
   }
   if (!page) {
     throw new Error(`Missing 'page' parameter`);
@@ -20,35 +17,21 @@ module.exports = api => async (req, res) => {
   }
 
   const from = PAGE_LIMIT * (parseInt(page, 10) - 1) + parseInt(index, 10) - 1;
-  if (from >= 10000) {
+  if (from >= MAX_SIZE) {
     throw new Error(`Request window ${from} is too large`);
   }
 
-  // Text query.
-  if (q) {
-    const {data: {hits: {hits}}} = await api.post('/noted/_search', searchQuery(q, from));
-
-    if (!hits.length) {
-      throw new Error(`Document on page '${page}' index '${index}' does't exist`);
+  const {
+    data: {
+      hits: {
+        hits
+      }
     }
-
-    return res.json(mapSearch(hits[0]));
-  }
-
-  // Date query.
-  const [month, day] = date.split('-').map(d => parseInt(d, 10));
-  if (month < 1 || month > 12) {
-    throw new Error(`Month ${month} is invalid`);
-  }
-  if (day < 1 || day > 31) {
-    throw new Error(`Day ${day} is invalid`);
-  }
-
-  const {data: {hits: {hits}}} = await api.post('/noted/_search', searchDate(month, day, from));
+  } = await api.post('/noted/_search', query(q, from));
 
   if (!hits.length) {
     throw new Error(`Document on page '${page}' index '${index}' does't exist`);
   }
 
-  res.json(mapDoc(hits[0]));
+  res.json(mapSearch(hits[0]));
 };
