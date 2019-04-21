@@ -12,7 +12,7 @@ const initialState = {
   page: 1,
   results: null,
   // Tags.
-  tags: null,
+  tags: [],
   // Single doc.
   doc: null
 };
@@ -74,11 +74,11 @@ const elastic = {
     },
 
     async getTags() {
-      this.set({tags: null, loading: true});
+      this.set({tags: [], loading: true});
 
       try {
         const {data: {total, tags}} = await api.get('/tags');
-        this.set({loading: false, tags: total ? tags : null});
+        this.set({loading: false, tags: total ? tags : []});
       } catch (err) {
         this.set({loading: false, error: `${err}`});
       }

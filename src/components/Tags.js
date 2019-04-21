@@ -41,9 +41,17 @@ class Tags extends React.Component {
   }
 }
 
-const mapState = state => {
-  return state.elastic;
-};
+const mapState = state => ({
+  tags: state.elastic.tags.reduce((tags, doc) => {
+    doc.tags.forEach(tag => {
+      if (!tags[tag]) {
+        tags[tag] = [];
+      }
+      tags[tag].push(doc);
+    });
+    return tags;
+  }, {})
+});
 
 const mapDispatch = dispatch => ({
   getTags: dispatch.elastic.getTags
