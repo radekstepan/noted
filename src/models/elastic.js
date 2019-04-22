@@ -10,9 +10,10 @@ const initialState = {
   // Search results.
   q: '',
   page: 1,
+  // Lists.
   results: null,
-  // Tags.
-  tags: [],
+  today: null,
+  tags: null,
   // Single doc.
   doc: null
 };
@@ -30,6 +31,33 @@ const elastic = {
     }
   },
   effects: {
+    async getDashboard() {
+      this.set({...initialState, loading: true});
+
+      try {
+        const [today, tags] = await Promise.all([
+          api.get('/today'),
+          api.get('/tags')
+        ]);
+
+        this.set({
+          loading: false,
+          today: today.data.total ? today.data.docs : null,
+          tags: tags.data.total ? Object.entries(tags.data.tags.reduce((tags, doc) => {
+            doc.tags.forEach(tag => {
+              if (!tags[tag]) {
+                tags[tag] = [];
+              }
+              tags[tag].push(doc);
+            });
+            return tags;
+          }, {})).sort(([a], [b]) => a < b ? -1 : 1) : null
+        });
+      } catch (err) {
+        this.set({loading: false, error: `${err}`});
+      }
+    },
+
     async search(params = {}) {
       // Clear search.
       if (!params.q) {
@@ -68,17 +96,6 @@ const elastic = {
         }
       });
       this.set({doc});
-    },
-
-    async getTags() {
-      this.set({tags: [], loading: true});
-
-      try {
-        const {data: {total, tags}} = await api.get('/tags');
-        this.set({loading: false, tags: total ? tags : []});
-      } catch (err) {
-        this.set({loading: false, error: `${err}`});
-      }
     },
 
     closeDoc() {

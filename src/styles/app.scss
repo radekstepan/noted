@@ -114,6 +114,10 @@ $highlight: #fff4bd;
       &:focus {
         outline: none;
       }
+
+      .section:not(:first-child) {
+        margin-top: 70px;
+      }
     }
 
     .category {
