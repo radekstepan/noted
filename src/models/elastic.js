@@ -33,10 +33,7 @@ const elastic = {
     async search(params = {}) {
       // Clear search.
       if (!params.q) {
-        if (!params.date) {
-          // Default to today's month/day combination.
-          params.date = new Date().toISOString().substr(5, 5);
-        }
+        return;
       }
 
       // Make sure we have int on initial search from URL.
@@ -55,7 +52,7 @@ const elastic = {
         const {data: results} = await api.get('/search', {params});
         this.set({loading: false, results});
       } catch (err) {
-        this.set({loading: false, error: err});
+        this.set({loading: false, error: `${err}`});
       }
     },
 

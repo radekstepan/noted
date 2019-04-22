@@ -47,13 +47,11 @@ Increase heap size: `$ sudo sysctl -w vm.max_map_count=262144`
 -  8 Use CSS grid for displaying articles, rather than just 3-up, deal with page always having an even number of content
 -  5 Set correct timezone from the request of the user
 -  5 Keep updating page title with query changes
--  3 Move deep diff of previous and new search state into reducer
 
 - 13 Favoriting of documents with index keywords from search
 -  8 Apply decay function over search results https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-function-score-query.html
 -  5 Search results sorted by date (filename)
 - 13 User accounts
 -  5 Use arrow keys to navigate between results
--  5 Clear search input when going back in history to a "date" result
 -  5 Existing bookmarks do not get cleared first
 -  5 Handle errors in doc modal

@@ -22,7 +22,7 @@ class Tags extends React.Component {
             {tags && (
               <div>
                 <div className="category">Bookmarks</div>
-                {Object.entries(tags).map(([tag, docs]) => (
+                {tags.map(([tag, docs]) => (
                   <div key={tag}>
                     <div className="sub">#{tag}</div>
                     <div className="flex">
@@ -42,7 +42,7 @@ class Tags extends React.Component {
 }
 
 const mapState = state => ({
-  tags: state.elastic.tags.reduce((tags, doc) => {
+  tags: Object.entries(state.elastic.tags.reduce((tags, doc) => {
     doc.tags.forEach(tag => {
       if (!tags[tag]) {
         tags[tag] = [];
@@ -50,7 +50,7 @@ const mapState = state => ({
       tags[tag].push(doc);
     });
     return tags;
-  }, {})
+  }, {})).sort(([a], [b]) => a < b ? -1 : 1)
 });
 
 const mapDispatch = dispatch => ({
