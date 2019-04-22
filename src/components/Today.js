@@ -1,13 +1,9 @@
 import React from 'react';
 
-import DocPreview from './DocPreview';
-
-const Today = ({docs}) => (
+const Today = ({docs, children}) => (
   <div className="section">
     <div className="category">On this day &hellip;</div>
-    {docs.map(doc =>
-      <DocPreview key={doc.id} {...doc} visited={false} />
-    )}
+    {docs.map(children)}
   </div>
 );
 

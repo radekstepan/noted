@@ -30,7 +30,7 @@ class Results extends React.Component {
 
   div = React.createRef();
 
-  onViewDoc = (id, index) => {
+  onViewDoc = (id, index) => () => {
     this.setState({visited: {...this.state.visited, [id]: true}});
     this.props.searchDoc(index + 1);
   };
@@ -82,7 +82,7 @@ class Results extends React.Component {
             {message && <div className={cls('message', {success: message[0] !== '0'})}>{message}</div>}
             <PoseGroup>{results && results.hits.map((doc, index) =>
               <Animation key={doc.id}>
-                <div onClick={() => this.onViewDoc(doc.id, index)}>
+                <div onClick={this.onViewDoc(doc.id, index)}>
                   <DocPreview {...doc} visited={this.state.visited[doc.id]} />
                 </div>
               </Animation>)}

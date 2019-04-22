@@ -41,6 +41,7 @@ $highlight: #fff4bd;
 
   .message {
     color: #656565;
+    white-space: pre-wrap;
 
     &.success {
       color: $success;

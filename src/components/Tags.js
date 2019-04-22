@@ -1,17 +1,13 @@
 import React from 'react';
 
-import DocPreview from './DocPreview';
-
-const Tags = ({tags}) => (
+const Tags = ({tags, children}) => (
   <div className="section">
     <div className="category">Bookmarks</div>
     {tags.map(([tag, docs]) => (
       <div key={tag}>
         <div className="sub">#{tag}</div>
         <div className="flex">
-          {docs.map(doc =>
-            <DocPreview key={doc.id} {...doc} visited={false} />
-          )}
+          {docs.map(children)}
         </div>
       </div>
     ))}

@@ -80,7 +80,10 @@ const elastic = {
         const {data: results} = await api.get('/search', {params});
         this.set({loading: false, results});
       } catch (err) {
-        this.set({loading: false, error: `${err}`});
+        this.set({
+          loading: false,
+          error: JSON.stringify(err.response.data.error, null, 2)
+        });
       }
     },
 
@@ -95,6 +98,11 @@ const elastic = {
           index
         }
       });
+      this.set({doc});
+    },
+
+    async getDoc(id) {
+      const {data: doc} = await api.get(`/doc/${id}`);
       this.set({doc});
     },
 
