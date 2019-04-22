@@ -6,10 +6,11 @@ import {diff} from 'deep-diff';
 class Searchbar extends React.Component {
   input = React.createRef();
 
+  search = () =>
+    this.props.navigate(`/${encodeURIComponent(this.input.current.value)}`);
+
   // Change URL on user input.
-  onSearch = debounce(() =>
-    this.props.navigate(`/${encodeURIComponent(this.input.current.value)}`)
-  , 500);
+  onSearch = debounce(this.search, 500);
 
   // Trigger search through persisted URL.
   componentDidMount() {
@@ -34,6 +35,7 @@ class Searchbar extends React.Component {
             ref={this.input}
             defaultValue={this.props.query.q}
             onChange={this.onSearch}
+            onKeyDown={e => (e.key === 'Enter') && this.search()}
             autoComplete="off"
             autoCorrect="off"
             spellCheck="false"

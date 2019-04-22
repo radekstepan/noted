@@ -80,13 +80,15 @@ class Results extends React.Component {
           <div className="container" ref={this.div} tabIndex="0">
             {error && <div className="message error">{error}</div>}
             {message && <div className={cls('message', {success: message[0] !== '0'})}>{message}</div>}
-            <PoseGroup>{results && results.hits.map((doc, index) =>
-              <Animation key={doc.id}>
-                <div onClick={this.onViewDoc(doc.id, index)}>
-                  <DocPreview {...doc} visited={this.state.visited[doc.id]} />
-                </div>
-              </Animation>)}
-            </PoseGroup>
+            <div className="grid">
+              <PoseGroup>{results && results.hits.map((doc, index) =>
+                <Animation key={doc.id}>
+                  <div onClick={this.onViewDoc(doc.id, index)}>
+                    <DocPreview {...doc} visited={this.state.visited[doc.id]} />
+                  </div>
+                </Animation>)}
+              </PoseGroup>
+            </div>
             {results && results.pages > 1 && <Pagination
               total={results.total}
               limit={results.limit}

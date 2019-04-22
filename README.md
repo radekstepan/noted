@@ -43,7 +43,6 @@ Increase heap size: `$ sudo sysctl -w vm.max_map_count=262144`
 ## TODO
 
 -  8 Remove title and date line from text and either use the title or parse filename and convert (ive = I've, when stays lowercase etc.)
--  8 Use CSS grid for displaying articles, rather than just 3-up, deal with page always having an even number of content
 -  5 Set correct timezone from the request of the user
 -  5 Keep updating page title with query changes
 

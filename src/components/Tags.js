@@ -6,7 +6,7 @@ const Tags = ({tags, children}) => (
     {tags.map(([tag, docs]) => (
       <div key={tag}>
         <div className="sub">#{tag}</div>
-        <div className="flex">
+        <div className="grid">
           {docs.map(children)}
         </div>
       </div>
