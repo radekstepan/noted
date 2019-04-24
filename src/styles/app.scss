@@ -75,7 +75,6 @@ $highlight: #fff4bd;
     border-bottom: 1px solid #e7e7e7;
     border-top: 5px solid $primary;
     background: #f6f7fc;
-    z-index: 1;
 
     .container {
       display: flex;
@@ -155,8 +154,8 @@ $highlight: #fff4bd;
       .date {
         color: #d2a73e;
         font-weight: bolder;
-        font-size: 80%;
-        margin-bottom: 5px;
+        font-size: 14px;
+        margin-bottom: 10px;
       }
 
       .header {
@@ -169,7 +168,7 @@ $highlight: #fff4bd;
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
-          border-bottom: 1px solid #2680eb42;
+          border-bottom: 1px solid #cfdcfa;
         }
 
         .score {
@@ -203,6 +202,7 @@ $highlight: #fff4bd;
       &.visited {
         .title {
           color: #000;
+          border-color: #d0d0d0;
         }
       }
     }

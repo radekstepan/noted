@@ -45,6 +45,8 @@ Increase heap size: `$ sudo sysctl -w vm.max_map_count=262144`
 -  8 Remove title and date line from text and either use the title or parse filename and convert (ive = I've, when stays lowercase etc.)
 -  5 Set correct timezone from the request of the user
 -  5 Keep updating page title with query changes
+-  8 Move docs to txt into separate nvx runnable binary in a repo
+-  5 Do routes.js work the way I think they work now that I use /!#?
 
 - 13 Favoriting of documents with index keywords from search
 -  8 Apply decay function over search results https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-function-score-query.html
