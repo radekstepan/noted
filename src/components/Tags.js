@@ -1,13 +1,13 @@
 import React from 'react';
 
-const Tags = ({tags, children}) => (
+const Tags = props => (
   <div className="section">
     <div className="category">Bookmarks</div>
-    {tags.map(([tag, docs]) => (
+    {props.tags.map(([tag, docs]) => (
       <div key={tag}>
         <div className="sub">#{tag}</div>
         <div className="grid">
-          {docs.map(children)}
+          {docs.map(props.children)}
         </div>
       </div>
     ))}

@@ -1,10 +1,10 @@
 import React from 'react';
 
-const Today = ({docs, children}) => (
+const Today = props => (
   <div className="section">
     <div className="category">On this day &hellip;</div>
     <div className="grid">
-      {docs.map(children)}
+      {props.docs.map(props.children)}
     </div>
   </div>
 );
