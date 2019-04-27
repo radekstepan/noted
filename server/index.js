@@ -8,6 +8,7 @@ const searchDoc = require('./searchDoc');
 const getDoc = require('./getDoc');
 const getToday = require('./getToday');
 const getTags = require('./getTags');
+const deleteTags = require('./deleteTags');
 const fileUpload = require('./fileUpload');
 const deleteIndex = require('./deleteIndex');
 
@@ -33,6 +34,9 @@ app.get('/api/today', getToday(api));
 
 // Get tags.
 app.get('/api/tags', getTags(api));
+
+// Delete tags.
+app.delete('/api/tags', deleteTags(api));
 
 // File upload.
 app.post('/api/upload', upload.any(), fileUpload(api));

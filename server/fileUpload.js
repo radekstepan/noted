@@ -3,6 +3,7 @@ const {mapSeries: map} = require('p-iteration');
 const hasha = require('hasha');
 
 const searchByName = require('./query/searchByName');
+const deleteTags = require('./query/deleteTags');
 const updateTag = require('./query/updateTag');
 const parseDoc = require('./utils/parseDoc');
 const parseTags = require('./utils/parseTags');
@@ -30,6 +31,9 @@ module.exports = api => async (req, res) => {
 
       // Tags file?
       if (filename === TAGS_FILE) {
+        // Delete existing.
+        await api.post('/noted/_update_by_query', deleteTags());
+        // Parse the file.
         const list = parseTags(body);
         // Update the documents with tags.
         await map(list, async ([filename, tag]) => {

@@ -50,6 +50,5 @@ Increase heap size: `$ sudo sysctl -w vm.max_map_count=262144`
 -  5 Search results sorted by date (filename)
 - 13 User accounts
 -  5 Use arrow keys to navigate between results
--  5 Existing bookmarks do not get cleared first
 -  5 Handle errors in doc modal
 -  5 Onclick tag make a search for it converting slug
