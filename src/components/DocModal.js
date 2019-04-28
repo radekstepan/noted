@@ -27,13 +27,14 @@ class DocModal extends React.Component {
             <div className="container">
               <div className="modal" onMouseDown={e => e.stopPropagation()}>
                 <div className="header">
-                  <div className="title">{doc.filename}</div>
+                  <div className="title">{doc.title}</div>
                   <div className="button" onClick={closeDoc}>
                     <Icon name="close" />
                   </div>
                 </div>
                 <Scroll className="body">
                   <div dangerouslySetInnerHTML={{__html: doc.body}} />
+                  <div className="filename">{doc.filename}</div>
                 </Scroll>
               </div>
             </div>

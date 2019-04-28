@@ -22,6 +22,7 @@ module.exports.all = (q, from) => ({
     fragment_size: FRAGMENT_SIZE,
     number_of_fragments: 1,
     fields: {
+      'title': {},
       'body.english': {}
     }
   }
@@ -36,6 +37,7 @@ module.exports.one = (q, from) => ({
     type: 'plain',
     number_of_fragments: 0,
     fields: {
+      'title': {},
       'body.english': {}
     }
   }

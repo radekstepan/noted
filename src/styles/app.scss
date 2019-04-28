@@ -5,6 +5,7 @@ $error: #cc54b4;
 $warning: #d89b29;
 
 $highlight: #fff4bd;
+$grey: #868e96;
 
 #app {
   height: 100%;
@@ -160,7 +161,6 @@ $highlight: #fff4bd;
 
       .header {
         display: flex;
-        // justify-content: space-between;
         align-items: center;
 
         .title {
@@ -175,7 +175,7 @@ $highlight: #fff4bd;
           font-size: 13px;
           padding: 2px 4px;
           border-radius: 2px;
-          color: #868e96;
+          color: $grey;
           margin-left: 15px;
 
           &.high {
@@ -304,6 +304,12 @@ $highlight: #fff4bd;
 
         em {
           background: $highlight;
+        }
+
+        .filename {
+          font-size: 14px;
+          margin-top: 10px;
+          color: $grey;
         }
       }
     }

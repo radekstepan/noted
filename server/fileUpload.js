@@ -1,3 +1,5 @@
+const {EOL} = require('os');
+
 const error = require('serialize-error');
 const {mapSeries: map} = require('p-iteration');
 const hasha = require('hasha');
@@ -27,14 +29,14 @@ module.exports = api => async (req, res) => {
         throw new Error('Upload plain text files');
       }
 
-      const body = buffer.toString('utf8');
+      const text = buffer.toString('utf8');
 
       // Tags file?
       if (filename === TAGS_FILE) {
         // Delete existing.
         await api.post('/noted/_update_by_query', deleteTags());
         // Parse the file.
-        const list = parseTags(body);
+        const list = parseTags(text);
         // Update the documents with tags.
         await map(list, async ([filename, tag]) => {
           const {data: {hits: {hits}}} = await api.post('/noted/_search', searchByName(filename));
@@ -47,7 +49,16 @@ module.exports = api => async (req, res) => {
       }
 
       // Handle a document.
-      const {title, date} = parseDoc(filename, body);
+      const end = text.search(EOL);
+      if (end == -1) {
+        throw new Error('Text is empty');
+      }
+      const [first, body] = [
+        text.substr(0, end),
+        text.substr(end)
+      ].map(t => t.trim());
+
+      const {title, date} = parseDoc(filename, first);
       const id = hasha(filename, {algorithm: 'md5'});
 
       await api.post(`/noted/_doc/${id}`, {

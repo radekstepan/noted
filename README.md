@@ -42,8 +42,8 @@ Increase heap size: `$ sudo sysctl -w vm.max_map_count=262144`
 
 ## TODO
 
--  8 Remove title and date line from text and either use the title or parse filename and convert (ive = I've, when stays lowercase etc.)
 -  5 Set correct timezone from the request of the user
+-  5 If updating existing document, check the tags first and don't remove them
 
 - 13 Favoriting of documents with index keywords from search
 -  8 Apply decay function over search results https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-function-score-query.html

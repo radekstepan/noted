@@ -33,5 +33,5 @@ module.exports = api => async (req, res) => {
     throw new Error(`Document on page '${page}' index '${index}' does't exist`);
   }
 
-  res.json(mapSearch(hits[0]));
+  res.json(mapSearch(hits[0], false));
 };
