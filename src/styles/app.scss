@@ -1,7 +1,7 @@
 $primary: #2680eb;
 
-$success: #3ca764;
-$error: #cc54b4;
+$success: #009688;
+$error: #ff3e61;
 $warning: #d89b29;
 
 $highlight: #fff4bd;
@@ -42,14 +42,21 @@ $grey: #868e96;
 
   .message {
     color: #586069;
+    // background: #f7f7f7;
+    // border-left: 5px solid #586069;
     white-space: pre-wrap;
+    // padding: 10px 20px;
 
     &.success {
       color: $success;
+      // background: #f6fbfb;
+      // border-color: #4DB6AC;
     }
 
     &.error {
       color: $error;
+      // background: #fff3f5;
+      // border-color: #ff3e61;
     }
   }
 

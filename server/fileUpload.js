@@ -7,6 +7,7 @@ const hasha = require('hasha');
 const searchByName = require('./query/searchByName');
 const deleteTags = require('./query/deleteTags');
 const updateTag = require('./query/updateTag');
+const upsertDoc = require('./query/upsertDoc');
 const parseDoc = require('./utils/parseDoc');
 const parseTags = require('./utils/parseTags');
 
@@ -61,13 +62,12 @@ module.exports = api => async (req, res) => {
       const {title, date} = parseDoc(filename, first);
       const id = hasha(filename, {algorithm: 'md5'});
 
-      await api.post(`/noted/_doc/${id}`, {
+      await api.post(`/noted/_update/${id}`, upsertDoc({
         filename,
         title,
         date,
-        body,
-        tags: []
-      });
+        body
+      }));
 
       return {filename, date, title, id};
     } catch (err) {
