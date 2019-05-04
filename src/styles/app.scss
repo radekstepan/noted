@@ -265,49 +265,65 @@ $grey: #868e96;
     }
 
     .container {
-      max-width: 612px;
+      width: 100%;
+      padding: 0;
+      box-sizing: border-box;
     }
 
     .modal {
-      margin: 25px 0;
+      margin: 0;
+      border: 0;
 
       .header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        padding: 15px 25px;
-        background: #fafbff;
-        border-bottom: 1px solid #efefef;
+        border-bottom: 1px solid #e7e7e7;
+        border-top: 5px solid $primary;
+        background: #f6f7fc;
 
-        .title {
-          flex-grow: 1;
-          white-space: nowrap;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          line-height: 1.5;
-        }
+        .wrapper {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 15px 25px;
+          max-width: 612px;
+          margin: 0 auto;
 
-        .button {
-          margin-left: 16px;
-          padding: 6px 10px;
+          .title {
+            flex-grow: 1;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            line-height: 1.5;
+            font-weight: bolder;
+            font-size: 23px;
+          }
 
-          .icon {
-            width: 12px;
-            cursor: pointer;
+          .button {
+            margin-left: 16px;
+            padding: 6px 10px;
 
-            path {
-              fill: #868e96;
+            .icon {
+              width: 12px;
+              cursor: pointer;
+
+              path {
+                fill: #868e96;
+              }
             }
           }
         }
       }
 
       .body {
-        padding: 15px 25px;
+        padding: 25px;
         line-height: 1.6;
         white-space: pre-wrap;
-        max-height: 84vh;
+        height: 87.5vh;
         text-overflow: ellipsis;
+
+        > div {
+          max-width: 612px;
+          margin: 0 auto;
+        }
 
         em {
           background: $highlight;
