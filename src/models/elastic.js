@@ -34,9 +34,11 @@ const elastic = {
     async getDashboard() {
       this.set({...initialState, loading: true});
 
+      const now = new Date();
+
       try {
         const [today, tags] = await Promise.all([
-          api.get('/today'),
+          api.get(`/date?month=${now.getMonth() + 1}&day=${now.getDate()}`),
           api.get('/tags')
         ]);
 

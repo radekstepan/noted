@@ -2,7 +2,15 @@ const query = require('./query/searchByDate');
 const {mapDoc, truncate} = require('./utils/mapHit');
 
 module.exports = api => async (req, res) => {
-  const d = new Date();
+  const {query: {month, day}} = req;
+
+  if (!month || month > 12 || month < 1) {
+    throw new Error('Missing `month` parameter');
+  }
+  if (!day || day > 31 || day < 1) {
+    throw new Error('Missing `day` parameter');
+  }
+
   const {
     data: {
       hits: {
@@ -12,7 +20,7 @@ module.exports = api => async (req, res) => {
         hits
       }
     }
-  } = await api.post('/noted/_search', query(d.getMonth() + 1, d.getDate()));
+  } = await api.post('/noted/_search', query(month, day));
 
   res.json({
     total,

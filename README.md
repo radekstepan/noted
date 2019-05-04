@@ -42,8 +42,6 @@ Increase heap size: `$ sudo sysctl -w vm.max_map_count=262144`
 
 ## TODO
 
--  5 Set correct timezone from the request of the user
-
 - 13 Favoriting of documents with index keywords from search
 -  8 Apply decay function over search results https://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-function-score-query.html
 -  5 Search results sorted by date (filename)
