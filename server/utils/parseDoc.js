@@ -3,6 +3,8 @@ const path = require('path');
 const chrono = require('chrono-node');
 const to = require('to-case');
 
+const DATE_TITLE_SEP = ' - ';
+
 module.exports = (filename, line) => {
   // Get date from the filename.
   let dateObj = chrono.parseDate(filename);
@@ -16,10 +18,10 @@ module.exports = (filename, line) => {
     }
   } else {
     // Parse the date from the first line.
-    let [datePart, titlePart] = line.split('-');
+    const [datePart, ...titlePart] = line.split(DATE_TITLE_SEP);
     // Include title?
-    if (titlePart) {
-      title = titlePart.trim();
+    if (titlePart.length) {
+      title = titlePart.join(DATE_TITLE_SEP).trim();
     } else {
       // Parse the title from the filename.
       title = to.sentence(path.parse(filename).name.replace(/\d+\-/g, ''));
