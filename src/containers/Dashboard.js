@@ -16,6 +16,9 @@ class Dashboard extends React.Component {
     this.props.getDoc(id);
   };
 
+  onSearch = value =>
+    this.props.navigate(`/${encodeURIComponent(value)}`);
+
   componentDidMount() {
     this.props.getDashboard();
   }
@@ -40,7 +43,7 @@ class Dashboard extends React.Component {
                 <DocPreview {...doc} visited={this.state.visited[doc.id]} />
               </div>
             )}</Today>}
-            {tags && <Tags tags={tags}>{doc => (
+            {tags && <Tags tags={tags} search={this.onSearch}>{doc => (
               <div key={doc.id} onClick={this.onViewDoc(doc.id)}>
                 <DocPreview {...doc} visited={this.state.visited[doc.id]} />
               </div>
@@ -60,7 +63,8 @@ const mapState = state => ({
 
 const mapDispatch = dispatch => ({
   getDashboard: dispatch.elastic.getDashboard,
-  getDoc: dispatch.elastic.getDoc
+  getDoc: dispatch.elastic.getDoc,
+  navigate: dispatch.router.navigate
 });
 
 export default connect(mapState, mapDispatch)(Dashboard);

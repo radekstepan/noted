@@ -6,6 +6,11 @@ $warning: #d89b29;
 
 $highlight: #fff4bd;
 $grey: #868e96;
+$border: #cdcdcd;
+$date: #d2a73e;
+
+$underline_blue: #cfdcfa;
+$underline_grey: #d0d0d0;
 
 #app {
   height: 100%;
@@ -32,7 +37,7 @@ $grey: #868e96;
   .modal {
     cursor: default;
     box-shadow: 0 3px 7px rgba(0,0,0,0.05);
-    border: 1px solid #cdcdcd;
+    border: 1px solid $border;
     background: #fff;
   }
 
@@ -42,21 +47,14 @@ $grey: #868e96;
 
   .message {
     color: #586069;
-    // background: #f7f7f7;
-    // border-left: 5px solid #586069;
     white-space: pre-wrap;
-    // padding: 10px 20px;
 
     &.success {
       color: $success;
-      // background: #f6fbfb;
-      // border-color: #4DB6AC;
     }
 
     &.error {
       color: $error;
-      // background: #fff3f5;
-      // border-color: #ff3e61;
     }
   }
 
@@ -142,6 +140,7 @@ $grey: #868e96;
       display: inline-block;
       margin-top: 50px;
       font-weight: bolder;
+      cursor: pointer;
     }
 
     .grid {
@@ -160,7 +159,7 @@ $grey: #868e96;
       max-width: 500px;
 
       .date {
-        color: #d2a73e;
+        color: $date;
         font-weight: bolder;
         font-size: 14px;
         margin-bottom: 10px;
@@ -175,7 +174,7 @@ $grey: #868e96;
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
-          border-bottom: 1px solid #cfdcfa;
+          border-bottom: 1px solid $underline_blue;
         }
 
         .score {
@@ -209,7 +208,7 @@ $grey: #868e96;
       &.visited {
         .title {
           color: #000;
-          border-color: #d0d0d0;
+          border-color: $underline_grey;
         }
       }
     }
@@ -223,11 +222,11 @@ $grey: #868e96;
       .page {
         padding: 4px;
         border-radius: 4px;
-        cursor: pointer;
         line-height: 24px;
         margin: 0 2px;
         min-width: 24px;
         text-align: center;
+        cursor: pointer;
 
         &.active {
           background: $primary;
@@ -241,12 +240,12 @@ $grey: #868e96;
         }
 
         &.disabled {
-          color: #7b8098;
+          color: $grey;
           background: #f5f6fa;
           cursor: default;
 
           .icon {
-            fill: #7b8098;
+            fill: $grey;
           }
         }
 
@@ -358,7 +357,7 @@ $grey: #868e96;
       width: 500px;
       height: 500px;
       background: #fafafa;
-      border: 2px dashed #d0d0d0;
+      border: 2px dashed $border;
 
       &:focus {
         outline: none;
@@ -375,7 +374,7 @@ $grey: #868e96;
           cursor: pointer;
 
           path {
-            fill: #d0d0d0;
+            fill: $border;
           }
         }
       }
