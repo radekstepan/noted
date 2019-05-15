@@ -1,4 +1,4 @@
-$primary: #2680eb;
+$primary: #2680eb; // #5f9b65
 
 $success: #009688;
 $error: #ff3e61;
@@ -8,9 +8,6 @@ $highlight: #fff4bd;
 $grey: #868e96;
 $border: #cdcdcd;
 $date: #d2a73e;
-
-$underline_blue: #cfdcfa;
-$underline_grey: #d0d0d0;
 
 #app {
   height: 100%;
@@ -158,6 +155,14 @@ $underline_grey: #d0d0d0;
       cursor: pointer;
       max-width: 500px;
 
+      &:hover {
+        .header {
+          .title {
+            border-color: lighten($primary, 10%);
+          }
+        }
+      }
+
       .date {
         color: $date;
         font-weight: bolder;
@@ -174,7 +179,9 @@ $underline_grey: #d0d0d0;
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
-          border-bottom: 1px solid $underline_blue;
+          border-bottom: 1px solid lighten($primary, 30%);
+          transition-property: border-color;
+          transition-duration: .3s;
         }
 
         .score {
@@ -206,9 +213,19 @@ $underline_grey: #d0d0d0;
       }
 
       &.visited {
-        .title {
-          color: #000;
-          border-color: $underline_grey;
+        &:hover {
+          .header {
+            .title {
+              border-color: lighten($grey, 10%);
+            }
+          }
+        }
+
+        .header {
+          .title {
+            color: #000;
+            border-color: lighten($grey, 30%);
+          }
         }
       }
     }
