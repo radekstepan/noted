@@ -42,6 +42,7 @@ Increase heap size: `$ sudo sysctl -w vm.max_map_count=262144`
 
 ## TODO
 
+-  8 Render `:keyword` when it begins on a newline as a code block in the UI
 - 34 Set gmail user (env) and use oauth to sign a user in
   - 13 Signin/out UI
   - 13 API
