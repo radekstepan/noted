@@ -92,7 +92,7 @@ class Results extends React.Component {
             {results && results.pages > 1 && <Pagination
               total={results.total}
               limit={results.limit}
-              pageCount="7"
+              pageCount={7}
               currentPage={results.page}
             >{d => (
               <div className="pagination">
