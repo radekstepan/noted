@@ -2,6 +2,8 @@
 
 Personal document search engine.
 
+![screencap](https://raw.githubusercontent.com/radekstepan/noted/master/screencap.gif)
+
 ## App quickstart
 
 To run the Node apps locally with ES in Docker:
