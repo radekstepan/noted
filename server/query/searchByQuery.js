@@ -3,10 +3,9 @@ const {PAGE_LIMIT, FRAGMENT_SIZE, ALL_FIELDS} = require('../const');
 const query = q => ({
   query_string: {
     query: q.replace(/[^\w\s]/gi, ''),
-    fields: ['title^3', 'body.english'],
+    fields: ['title^10', 'body.english'],
     analyzer: 'english_noted',
     fuzziness: 'AUTO',
-    default_operator: 'AND',
     lenient: true,
     phrase_slop: 50
   }
