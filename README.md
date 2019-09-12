@@ -2,7 +2,7 @@
 
 Personal document search engine.
 
-![screencap](https://raw.githubusercontent.com/radekstepan/noted/master/screencap.gif)
+> The problem with a personal search engine is that most of the time you do not have a well formed long-tail query in mind. You have a few keywords, mostly just one. An interface that lets you explore those keywords/tags is thus vastly superior, as it can narrow down your query step by step.
 
 ## App quickstart
 
